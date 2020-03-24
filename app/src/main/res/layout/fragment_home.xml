@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".Home.HomeFragment">
 
-    <TextView
+    <CalendarView
+        android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textColor="#000"/>
+        android:layout_height="wrap_content"
+        android:background="#78BCF3" />
 
 </FrameLayout>
