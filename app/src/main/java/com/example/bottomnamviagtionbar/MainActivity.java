@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBar toolbar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +28,11 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar.setTitle("Home");
         loadFragment(new HomeFragment());
+
+
+
     }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -67,4 +72,5 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 }

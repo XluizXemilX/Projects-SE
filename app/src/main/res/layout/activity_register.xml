@@ -7,8 +7,9 @@
     tools:context=".Register">
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etUsername"
         android:layout_width="308dp"
+        android:maxLines="1"
         android:layout_height="48dp"
         android:autofillHints="@string/email"
         android:ems="10"
@@ -22,9 +23,10 @@
         app:layout_constraintVertical_bias="0.049" />
 
     <EditText
-        android:id="@+id/etPassword"
+        android:id="@+id/etPassLogin"
         android:layout_width="308dp"
         android:layout_height="48dp"
+        android:maxLines="1"
         android:autofillHints="@string/pass"
         android:ems="10"
         android:hint="@string/pass"
@@ -32,7 +34,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etUsername"
         app:layout_constraintVertical_bias="0.072" />
 
     <Button
@@ -45,12 +47,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etPassLogin"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="308dp"
+        android:maxLines="1"
         android:layout_height="48dp"
         android:autofillHints="@string/name"
         android:ems="10"
