@@ -1,7 +1,8 @@
-package com.example.bottomnamviagtionbar;
+package com.example.bottomnamviagtionbar.Home;
 
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,17 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.bottomnamviagtionbar.Login;
+import com.example.bottomnamviagtionbar.R;
+import com.example.bottomnamviagtionbar.Register;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActionBar toolbar;
-
+    TextView logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +29,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = getSupportActionBar();
+        logout = (TextView)findViewById(R.id.tvLogout);
 
         BottomNavigationView navigation = findViewById(R.id.navigationView);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         toolbar.setTitle("Home");
         loadFragment(new HomeFragment());
+        logout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(MainActivity.this, Login.class);
+                startActivity(i);
+            }
+        });
 
 
 

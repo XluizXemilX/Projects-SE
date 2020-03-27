@@ -18,5 +18,7 @@
     <string name="recoveryMessage">An email has been sent with your password!!!</string>
     <string name="resent">Resent</string>
     <string name="returnlogin">Return to Login</string>
+    <string name="remember">Remember Me</string>
+    <string name="logout">Logout</string>
 
 </resources>
