@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.GridView;
 
 import com.example.bottomnamviagtionbar.Login;
 import com.example.bottomnamviagtionbar.R;
@@ -20,6 +22,7 @@ import com.example.bottomnamviagtionbar.Register;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button createBudgetButton;
     private ActionBar toolbar;
     TextView logout;
 
