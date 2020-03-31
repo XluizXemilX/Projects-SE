@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bottomnamviagtionbar">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,12 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home.SetupBudget"></activity>
-        <activity android:name=".RecoveryMessage" />
-        <activity android:name=".RecoveryPass" />
-        <activity android:name=".Register" />
+        <activity android:name=".RergistrationAndLogin.ChangePassword"></activity>
+        <activity android:name=".Home.SetupBudget" />
+        <activity android:name=".RergistrationAndLogin.RecoveryMessage" />
+        <activity android:name=".RergistrationAndLogin.RecoveryPass" />
+        <activity android:name=".RergistrationAndLogin.Register" />
         <activity android:name=".Home.MainActivity" />
-        <activity android:name=".Login">
+        <activity android:name=".RergistrationAndLogin.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
