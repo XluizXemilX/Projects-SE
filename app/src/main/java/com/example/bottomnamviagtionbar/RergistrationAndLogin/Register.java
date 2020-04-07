@@ -36,7 +36,7 @@ public class Register extends AppCompatActivity{
                 String name = _etName.getText().toString();
                 String userVal = etUser.getText().toString();
                 String passVal = etPass.getText().toString();
-                if(userVal.length()>1) {
+                if((userVal.length()>1)&& passVal.length()>5) {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("etName", name);
                     editor.putString("etUser", userVal);

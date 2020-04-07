@@ -12,7 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RergistrationAndLogin.ChangePassword"></activity>
+        <activity android:name=".Settings.privacy"></activity>
+        <activity android:name=".Settings.preferances" />
+        <activity android:name=".Home.Budget.AccountPage" />
+        <activity android:name=".Home.Budget.History" />
+        <activity android:name=".Home.Paybills" />
+        <activity android:name=".Home.Budget.BudgetPage" />
+        <activity android:name=".Home.Budget.AddBox" />
+        <activity android:name=".RergistrationAndLogin.ChangePassword" />
         <activity android:name=".Home.SetupBudget" />
         <activity android:name=".RergistrationAndLogin.RecoveryMessage" />
         <activity android:name=".RergistrationAndLogin.RecoveryPass" />

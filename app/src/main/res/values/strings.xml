@@ -27,5 +27,9 @@
     <string name="newPassword">New Password</string>
     <string name="ConfirmNP">Confirm Password</string>
     <string name="Save">SAVE</string>
+    <string name="addbill">Add Bill +</string>
+    <string name="Amount">Amount</string>
+    <string name="CalculateBtn">Calculate</string>
+    <string name="passRequirements">* Password must contain a minimum of 6 characters!</string>
 
 </resources>

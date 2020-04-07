@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +27,7 @@ public class Login extends AppCompatActivity{
    TextView recoveryPass, Register;
    Button ButtonLogin;
    SharedPreferences preferences;
+   CheckBox remember;
 
 
     @Override
@@ -36,10 +40,8 @@ public class Login extends AppCompatActivity{
        Register = (TextView)findViewById(R.id.tvregister);
        recoveryPass = (TextView)findViewById(R.id.tvRecoverP);
        ButtonLogin = (Button)findViewById(R.id.btnlogin);
+       remember =(CheckBox)findViewById(R.id.checkBoxRemember);
        preferences = getSharedPreferences("UserInfo",0);
-
-
-
 
        ButtonLogin.setOnClickListener(new View.OnClickListener(){
            @Override
@@ -50,13 +52,16 @@ public class Login extends AppCompatActivity{
                String registeredUserEmail = preferences.getString("etUser", "");
                String registeredUserPass = preferences.getString("etPass", "");
                String temporaryPassword = preferences.getString("tempPass", "");
+               if(remember.isChecked()){
+                   usernameVal = registeredUserEmail;
+                   etUser.setText(registeredUserEmail);
+                   etPass.setText(registeredUserPass);
+
+               }
+
                if((usernameVal.toLowerCase().equals(registeredUserEmail.toLowerCase())&& passwordVal.equals(temporaryPassword))){
                Intent i = new Intent(Login.this, ChangePassword.class);
                startActivity(i);
-               }
-               else if(registeredUserEmail.isEmpty() || registeredUserPass.isEmpty())
-               {
-                   Toast.makeText(Login.this, "Enter Email and Password!", Toast.LENGTH_SHORT).show();
                }
                else if((usernameVal.toLowerCase().equals(registeredUserEmail.toLowerCase())&& passwordVal.equals(registeredUserPass))){
                    Intent i = new Intent(Login.this, MainActivity.class);

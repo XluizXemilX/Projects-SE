@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".RergistrationAndLogin.Login">
 
+
     <EditText
     android:id="@+id/etUsername"
         android:maxLines="1"
@@ -27,14 +28,14 @@
         android:layout_height="48dp"
         android:autofillHints="@string/pass"
         android:ems="10"
-        android:maxLines="1"
         android:hint="@string/pass"
         android:inputType="textPassword"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername"
-        app:layout_constraintVertical_bias="0.072" />
+        app:layout_constraintVertical_bias="0.029" />
 
     <Button
         android:id="@+id/btnlogin"
@@ -69,9 +70,22 @@
         android:text="@string/forPass"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.175"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassLogin"
-        app:layout_constraintVertical_bias="0.002" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/checkBoxRemember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:text="@string/remember"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecoverP"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
