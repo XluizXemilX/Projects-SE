@@ -12,8 +12,11 @@ import com.example.bottomnamviagtionbar.R;
 
 public class SetupBudget extends AppCompatActivity {
     public float monthlyLim;
-    public View WeeklyLim;
-    public View DailyLim;
+    public float WeeklyLim;
+    public float DailyLim;
+    public String temp1;
+    public String temp2;
+    public String temp3;
 
     private Button button;
     @Override
@@ -29,11 +32,23 @@ public class SetupBudget extends AppCompatActivity {
         });
     }
     public void openMain(){
-        monthlyLim = 12.3f; //I need to find a way to get the user input into a float and not a view
-        WeeklyLim = findViewById(R.id.Weekly_Limit);
-        DailyLim = findViewById(R.id.Daily_Limit);
+        //temp1 = findViewById(R.id.Monthly_Limit).toString();
+        //temp2 = findViewById(R.id.Weekly_Limit).toString();
+        //temp3 = findViewById(R.id.Daily_Limit).toString();
+
+        monthlyLim = Integer.parseInt(temp1); //I need to find a way to get the user input into a float and not a view
+        //WeeklyLim = Integer.parseInt(temp2);
+        //DailyLim = Integer.parseInt(temp3);
+
+
         BudgetVar BV = new BudgetVar();
         BV.SetMonthlyLimit(monthlyLim);
+        BV.SetWeeklyLimit(WeeklyLim);
+        BV.SetDailyLimit(DailyLim);
+
+        System.out.print("Limits");
+        System.out.print(temp1);
+        System.out.print(WeeklyLim);
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

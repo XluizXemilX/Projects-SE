@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bottomnamviagtionbar.Home.SetupBudget;
 import com.example.bottomnamviagtionbar.R;
 
 public class Register extends AppCompatActivity{
@@ -43,7 +44,7 @@ public class Register extends AppCompatActivity{
                     editor.putString("etPass", passVal);
                     editor.apply();
                     Toast.makeText(Register.this, "User Registered", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Register.this, Login.class);
+                    Intent i = new Intent(Register.this, SetupBudget.class);
                     startActivity(i);
                 }
                 else{
