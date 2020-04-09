@@ -21,8 +21,13 @@
     <string name="remember">Remember Me</string>
     <string name="logout">Logout</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="spinner">
+        <item>Select</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
     <string name="newPasswordMessage">Enter your new password</string>
     <string name="newPassword">New Password</string>
     <string name="ConfirmNP">Confirm Password</string>

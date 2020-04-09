@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="-1dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="1dp" />
 
     <ScrollView
@@ -23,8 +23,12 @@
         android:layout_height="677dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="54dp">
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,62 +38,223 @@
                 android:id="@+id/calculate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/CalculateBtn"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addbtn" />
+                app:layout_constraintTop_toBottomOf="@+id/addbtn"
+                app:layout_constraintVertical_bias="1.0" />
 
             <Button
                 android:id="@+id/addbtn"
                 android:layout_width="50dp"
                 android:layout_height="47dp"
-                android:layout_marginStart="171dp"
-                android:layout_marginLeft="171dp"
+                android:layout_marginStart="180dp"
+                android:layout_marginLeft="180dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="190dp"
-                android:layout_marginRight="190dp"
+                android:layout_marginEnd="181dp"
+                android:layout_marginRight="181dp"
                 android:text="+"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linearlayout"
-                app:layout_constraintVertical_bias="0.127" />
-
-            <TextView
-                android:id="@+id/tvLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:text="@string/logout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/linearlayoutBudget"
+                app:layout_constraintVertical_bias="0.0" />
 
             <LinearLayout
-                android:id="@+id/linearlayout"
+                android:id="@+id/linearlayoutBudget"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLogout"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/etAmount2"
+                app:layout_constraintVertical_bias="0.105" />
 
             <TextView
                 android:id="@+id/result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/calculate" />
+
+           <TextView
+                android:id="@+id/tvType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:text="Type"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.042"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etMainBudget"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="42dp"
+                android:text="@string/Amount"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.294"
+                app:layout_constraintStart_toEndOf="@+id/tvType"
+                app:layout_constraintTop_toBottomOf="@+id/etMainBudget"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvFreq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:text="Frequency"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.472"
+                app:layout_constraintStart_toEndOf="@+id/tvAmount"
+                app:layout_constraintTop_toBottomOf="@+id/SpinnerMainBudget"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/etType"
+                android:layout_width="110dp"
+                android:layout_height="39dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.053"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvType"
+                app:layout_constraintVertical_bias="0.004"
+                android:layout_alignParentLeft="true" />
+
+            <EditText
+                android:id="@+id/etAmount"
+                android:layout_width="110dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.085"
+                app:layout_constraintStart_toEndOf="@+id/etType"
+                app:layout_constraintTop_toBottomOf="@+id/tvAmount"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/etType2"
+                android:layout_width="110dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.053"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etType"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/etAmount2"
+                android:layout_width="110dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.006"
+                app:layout_constraintStart_toEndOf="@+id/etType2"
+                app:layout_constraintTop_toBottomOf="@+id/etAmount"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/spinnerFrequency"
+                android:layout_width="140dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.56"
+                app:layout_constraintStart_toEndOf="@+id/etAmount"
+                app:layout_constraintTop_toBottomOf="@+id/tvFreq"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/spinnerFrequency2"
+                android:layout_width="140dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.56"
+                app:layout_constraintStart_toEndOf="@+id/etAmount2"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerFrequency"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/tvBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Budget"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.045"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.04" />
+
+            <EditText
+                android:id="@+id/etMainBudget"
+                android:layout_width="wrap_content"
+                android:layout_height="39dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:text="$"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.08"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvBudget"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Spinner
+                android:id="@+id/SpinnerMainBudget"
+                android:layout_width="140dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.775"
+                app:layout_constraintStart_toEndOf="@+id/etMainBudget"
+                app:layout_constraintTop_toBottomOf="@+id/tvBudget"
+                app:layout_constraintVertical_bias="0.0" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
@@ -98,6 +263,7 @@
         android:id="@+id/navigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         app:itemBackground="?selectableItemBackgroundBorderless"
@@ -107,6 +273,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav" />
+        app:menu="@menu/bottom_nav"
+        android:layout_alignParentLeft="true" />
 
 </RelativeLayout>
