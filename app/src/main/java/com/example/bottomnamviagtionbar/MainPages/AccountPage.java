@@ -16,9 +16,7 @@ import android.view.View;
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.BudgetVar;
-import com.example.bottomnamviagtionbar.Home.MainActivity;
-import com.example.bottomnamviagtionbar.Home.Paybills;
-import com.example.bottomnamviagtionbar.Home.SetupBudget;
+
 import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
 import com.example.bottomnamviagtionbar.Settings.settings;
@@ -34,22 +32,7 @@ public class AccountPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        BudgetVar BV = new BudgetVar();
 
-        TextView txtview = (TextView) findViewById(R.id.textMonthBudget);
-        float temp = BV.MonthlyLimit;
-        String tmp = Float.toString(temp);
-        txtview.setText(tmp);
-
-        TextView ttview = (TextView) findViewById(R.id.textWeeklyBudget);
-        float temp2 = BV.GetWeeklyLimit();
-        String tmp2 = Float.toString(temp2);
-        ttview.setText(tmp2);
-
-        TextView tview = (TextView) findViewById(R.id.textDailyBudget);
-        float temp3 = BV.GetDailyLimit();
-        String tmp3 = Float.toString(temp3);
-        tview.setText(tmp3);
 
 
         //toolbar = getSupportActionBar();
