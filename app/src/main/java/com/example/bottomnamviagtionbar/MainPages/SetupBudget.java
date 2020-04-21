@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bottomnamviagtionbar.BudgetVar;
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.R;
 
@@ -34,6 +35,11 @@ public class SetupBudget extends AppCompatActivity {
                     Toast.makeText(SetupBudget.this, "Enter an amount!", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    ///////
+                    BudgetVar BV = new BudgetVar();
+                    String tmpp = income.getText().toString();
+                    BV.MonthlyLimit = Float.valueOf(tmpp);
+                    ///////
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("Income", value);
                     editor.apply();
