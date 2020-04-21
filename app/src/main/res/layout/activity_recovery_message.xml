@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2196F3"
     tools:context=".RergistrationAndLogin.RecoveryMessage">
 
     <TextView
         android:id="@+id/tvmessage"
         android:layout_width="334dp"
         android:layout_height="107dp"
+        android:background="@drawable/box"
         android:text="@string/recoveryMessage"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
+        android:background="@drawable/box"
         android:text="@string/resent"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="37dp"
+        android:background="@drawable/box"
         android:text="@string/returnlogin"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

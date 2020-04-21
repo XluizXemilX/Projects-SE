@@ -19,11 +19,11 @@
     <item
         android:id="@+id/history"
         android:icon="@drawable/ic_history_black_24dp"
-        android:title="History" />
+        android:title="Transactions" />
 
     <item
         android:id="@+id/paybills"
         android:icon="@drawable/ic_account_balance_wallet_black_24dp"
-        android:title="Paybills" />
+        android:title="Bills" />
 
 </menu>

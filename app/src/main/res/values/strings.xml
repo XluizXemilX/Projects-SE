@@ -23,7 +23,6 @@
 
     <string-array name="spinner">
         <item>Select</item>
-        <item>Daily</item>
         <item>Weekly</item>
         <item>Monthly</item>
         <item>Yearly</item>
@@ -36,5 +35,8 @@
     <string name="Amount">Amount</string>
     <string name="CalculateBtn">Calculate</string>
     <string name="passRequirements">* Password must contain a minimum of 6 characters!</string>
+    <string name="value">$0.0</string>
+    <string name="rent">Rent</string>
+    <string name="CurrentPassword">Current Password</string>
 
 </resources>

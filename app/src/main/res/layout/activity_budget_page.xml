@@ -1,271 +1,311 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home.Budget.BudgetPage">
+    android:background="#EDEDED"
+    tools:context=".MainPages.Budget.BudgetPage">
 
     <include
         android:id="@+id/topbar"
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="1dp" />
+        android:background="@drawable/top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="677dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginBottom="2dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp">
+        android:layout_height="550dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider19"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topbar"
+        app:layout_constraintVertical_bias="0.0">
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/calculate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/CalculateBtn"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addbtn"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <Button
-                android:id="@+id/addbtn"
-                android:layout_width="50dp"
-                android:layout_height="47dp"
-                android:layout_marginStart="180dp"
-                android:layout_marginLeft="180dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="181dp"
-                android:layout_marginRight="181dp"
-                android:text="+"
-                android:textSize="22sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linearlayoutBudget"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <LinearLayout
-                android:id="@+id/linearlayoutBudget"
+            <View
+                android:id="@+id/divider2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAmount2"
-                app:layout_constraintVertical_bias="0.105" />
-
-            <TextView
-                android:id="@+id/result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calculate" />
-
-           <TextView
-                android:id="@+id/tvType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="42dp"
-                android:text="Type"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.042"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etMainBudget"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/tvAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="42dp"
-                android:text="@string/Amount"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.294"
-                app:layout_constraintStart_toEndOf="@+id/tvType"
-                app:layout_constraintTop_toBottomOf="@+id/etMainBudget"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/tvFreq"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="42dp"
-                android:text="Frequency"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.472"
-                app:layout_constraintStart_toEndOf="@+id/tvAmount"
-                app:layout_constraintTop_toBottomOf="@+id/SpinnerMainBudget"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <EditText
-                android:id="@+id/etType"
-                android:layout_width="110dp"
-                android:layout_height="39dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.053"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvType"
-                app:layout_constraintVertical_bias="0.004"
-                android:layout_alignParentLeft="true" />
-
-            <EditText
-                android:id="@+id/etAmount"
-                android:layout_width="110dp"
-                android:layout_height="39dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.085"
-                app:layout_constraintStart_toEndOf="@+id/etType"
-                app:layout_constraintTop_toBottomOf="@+id/tvAmount"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <EditText
-                android:id="@+id/etType2"
-                android:layout_width="110dp"
-                android:layout_height="39dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.053"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etType"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <EditText
-                android:id="@+id/etAmount2"
-                android:layout_width="110dp"
-                android:layout_height="39dp"
-                android:layout_marginStart="14dp"
-                android:layout_marginLeft="14dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.006"
-                app:layout_constraintStart_toEndOf="@+id/etType2"
-                app:layout_constraintTop_toBottomOf="@+id/etAmount"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <Spinner
-                android:id="@+id/spinnerFrequency"
-                android:layout_width="140dp"
-                android:layout_height="39dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.56"
-                app:layout_constraintStart_toEndOf="@+id/etAmount"
-                app:layout_constraintTop_toBottomOf="@+id/tvFreq"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <Spinner
-                android:id="@+id/spinnerFrequency2"
-                android:layout_width="140dp"
-                android:layout_height="39dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.56"
-                app:layout_constraintStart_toEndOf="@+id/etAmount2"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerFrequency"
-                app:layout_constraintVertical_bias="0.0" />
+                android:layout_height="20dp"
+                android:background="?attr/listChoiceBackgroundIndicator" />
 
             <TextView
                 android:id="@+id/tvBudget"
+                android:layout_width="90dp"
+                android:layout_height="23dp"
+                android:gravity="right"
+                android:text="Income"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutBudget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="Budget"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.045"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.04" />
+                android:layout_gravity="center"
+                android:background="@drawable/box"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/etMainBudget"
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="169dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".50"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/value"
+                    android:inputType="numberDecimal" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="184dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".50" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="?attr/listChoiceBackgroundIndicator" />
+
+            <LinearLayout
+                android:id="@+id/table"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCategory"
+                    android:layout_width="37dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Category"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="28dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Amount"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvFreq"
+                    android:layout_width="47dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Frequency"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="?attr/listChoiceBackgroundIndicator" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutDynamic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+
+                android:background="@drawable/box"
+                android:orientation="vertical"
+                android:scrollbars="vertical">
+
+                <LinearLayout
+                    android:id="@+id/LinearLayoutDefaultFields"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etType"
+                        android:layout_width="221dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="@string/rent"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/etAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="@string/value"
+                        android:inputType="numberDecimal" />
+
+                    <Spinner
+                        android:id="@+id/spinner1"
+                        android:layout_width="231dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearLayoutDefaultFields2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etType2"
+                        android:layout_width="221dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="@string/rent"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/etAmount2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:hint="@string/value"
+                        android:inputType="numberDecimal" />
+
+                    <Spinner
+                        android:id="@+id/spinner2"
+                        android:layout_width="231dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnAdd"
                 android:layout_width="wrap_content"
-                android:layout_height="39dp"
-                android:ems="10"
-                android:inputType="numberDecimal"
-                android:text="$"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.08"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvBudget"
-                app:layout_constraintVertical_bias="0.0" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_btn_cal"
+                android:text="+"
+                android:textSize="24sp" />
 
-            <Spinner
-                android:id="@+id/SpinnerMainBudget"
-                android:layout_width="140dp"
-                android:layout_height="39dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.775"
-                app:layout_constraintStart_toEndOf="@+id/etMainBudget"
-                app:layout_constraintTop_toBottomOf="@+id/tvBudget"
-                app:layout_constraintVertical_bias="0.0" />
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="?attr/listChoiceBackgroundIndicator" />
 
-        </android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/btnCalculate"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_btn_cal"
+                android:text="@string/CalculateBtn" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="?attr/listChoiceBackgroundIndicator" />
+
+            <TextView
+                android:id="@+id/tvResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider18"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="?attr/listChoiceBackgroundIndicator" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/divider11"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".20"
+                    android:background="?attr/listChoiceBackgroundIndicator" />
+
+                <TextView
+                    android:id="@+id/totaltv"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:gravity="center"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/divider6"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".20"
+                    android:background="?attr/listChoiceBackgroundIndicator" />
+
+                <TextView
+                    android:id="@+id/ProjectedSaving"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:gravity="center"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/divider7"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".20"
+                    android:background="?attr/listChoiceBackgroundIndicator" />
+            </LinearLayout>
+
+        </LinearLayout>
     </ScrollView>
+
+    <View
+        android:id="@+id/divider19"
+        android:layout_width="409dp"
+        android:layout_height="10dp"
+        android:background="?attr/listChoiceBackgroundIndicator"
+        app:layout_constraintBottom_toTopOf="@+id/navigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/bottom"
         app:itemBackground="?selectableItemBackgroundBorderless"
         app:itemHorizontalTranslationEnabled="true"
         app:itemIconTint="@drawable/nav_item_color_state"
@@ -273,7 +313,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav"
-        android:layout_alignParentLeft="true" />
+        app:menu="@menu/bottom_nav" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

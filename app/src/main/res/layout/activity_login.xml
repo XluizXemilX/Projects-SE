@@ -4,29 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2196F3"
     tools:context=".RergistrationAndLogin.Login">
 
 
     <EditText
-    android:id="@+id/etUsername"
+        android:id="@+id/etUsername"
+        android:layout_width="308dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:autofillHints="@string/email"
+        android:background="@drawable/box"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
         android:maxLines="1"
-    android:layout_width="308dp"
-    android:layout_height="48dp"
-    android:autofillHints="@string/email"
-    android:ems="10"
-    android:hint="@string/email"
-    android:inputType="textEmailAddress"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.195" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.031" />
 
     <EditText
         android:id="@+id/etPassLogin"
         android:layout_width="308dp"
         android:layout_height="48dp"
         android:autofillHints="@string/pass"
+        android:background="@drawable/box"
         android:ems="10"
         android:hint="@string/pass"
         android:inputType="textPassword"
@@ -42,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
+        android:background="@drawable/box"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,9 +74,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/forPass"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassLogin"
         app:layout_constraintVertical_bias="0.0" />
@@ -79,13 +86,24 @@
         android:id="@+id/checkBoxRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="8dp"
         android:text="@string/remember"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintHorizontal_bias="0.821"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRecoverP"
+        app:layout_constraintTop_toBottomOf="@+id/etPassLogin"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="127dp"
+        android:layout_height="127dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.115"
+        app:srcCompat="@drawable/ic_account_info" />
 
 </android.support.constraint.ConstraintLayout>

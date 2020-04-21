@@ -1,57 +1,53 @@
-package com.example.bottomnamviagtionbar.Home;
-
+package com.example.bottomnamviagtionbar.MainPages;
 
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.example.bottomnamviagtionbar.Home.Budget.AccountPage;
-import com.example.bottomnamviagtionbar.Home.Budget.BudgetPage;
-import com.example.bottomnamviagtionbar.Home.Budget.History;
+import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
+import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
-import com.example.bottomnamviagtionbar.Settings.preferances;
-import com.example.bottomnamviagtionbar.Settings.privacy;
+import com.example.bottomnamviagtionbar.Settings.settings;
 
+public class Paybills extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    private Button createBudgetButton;
-    private ActionBar toolbar;
-
+    //private ActionBar toolbar;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_paybills);
 
         //toolbar = getSupportActionBar();
 
         Toolbar topbar = findViewById(R.id.topbar);
+        topbar.setTitle("Bills");
         setSupportActionBar(topbar);
-        //topbar.setTitle("Home");
-
-
+        topbar.setNavigationIcon(R.drawable.ic_notifications_black_24dp);
+        topbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Paybills.this, NotificationPage.class);
+                startActivity(i);
+            }
+        });
 
         BottomNavigationView navigation = findViewById(R.id.navigationView);
+        Menu menu = navigation.getMenu();
+        MenuItem menuItem = menu.getItem(4);
+        menuItem.setChecked(true);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -60,50 +56,47 @@ public class MainActivity extends AppCompatActivity {
                         //toolbar.setTitle("Home");
                         //loadFragment(new HomeFragment());
                         //return true;
-                        Intent i = new Intent(MainActivity.this, MainActivity.class);
+                        Intent i = new Intent(Paybills.this, MainActivity.class);
                         startActivity(i);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.account:
                         //toolbar.setTitle("AccountPage");
                         //loadFragment(new AccountFragment());
                         //return true;
-                        Intent a = new Intent(MainActivity.this, AccountPage.class);
+                        Intent a = new Intent(Paybills.this, AccountPage.class);
                         startActivity(a);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.budget:
                         //toolbar.setTitle("Budget");
                         //loadFragment(new BudgetFragment());
                         //return true;
-                        Intent b = new Intent(MainActivity.this, BudgetPage.class);
+                        Intent b = new Intent(Paybills.this, BudgetPage.class);
                         startActivity(b);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.history:
                         //toolbar.setTitle("History");
                         //loadFragment(new HistoryFragment());
                         //return true;
-                        Intent c = new Intent(MainActivity.this, History.class);
+                        Intent c = new Intent(Paybills.this, History.class);
                         startActivity(c);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.paybills:
                         //toolbar.setTitle("PayBills");
                         //loadFragment(new PaybillsFragment());
                         //return true;
-                        Intent d = new Intent(MainActivity.this, Paybills.class);
-                        startActivity(d);
                         break;
                 }
                 return false;
             }
         });
 
-       // toolbar.setTitle("Home");
-       // loadFragment(new HomeFragment());
-
-
-
+         //toolbar.setTitle("Paybills");
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -112,25 +105,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.subitem2:
-                Intent i = new Intent(this, preferances.class);
+            case R.id.item1:
+                Intent i = new Intent(this, settings.class);
                 startActivity(i);
                 break;
-            case R.id.subitem3:
-                Intent a = new Intent(this, privacy.class);
-                startActivity(a);
-            case R.id.subitem4:
+            case R.id.item2:
                 Intent b = new Intent(this, Login.class);
                 startActivity(b);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
 }

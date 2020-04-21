@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bottomnamviagtionbar.Home.MainActivity;
+import com.example.bottomnamviagtionbar.MainPages.MainActivity;
 import com.example.bottomnamviagtionbar.R;
 
 
@@ -43,6 +44,10 @@ public class Login extends AppCompatActivity{
        remember =(CheckBox)findViewById(R.id.checkBoxRemember);
        preferences = getSharedPreferences("UserInfo",0);
 
+       setRememberVariables();
+
+
+
        ButtonLogin.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View v)
@@ -52,20 +57,33 @@ public class Login extends AppCompatActivity{
                String registeredUserEmail = preferences.getString("etUser", "");
                String registeredUserPass = preferences.getString("etPass", "");
                String temporaryPassword = preferences.getString("tempPass", "");
-               if(remember.isChecked()){
-                   usernameVal = registeredUserEmail;
-                   etUser.setText(registeredUserEmail);
-                   etPass.setText(registeredUserPass);
+               //if(remember.isChecked()){
+//
+               //    etUser.setText(registeredUserEmail);
+               //    etPass.setText(registeredUserPass);
+               //}
 
+               if(usernameVal.isEmpty() || passwordVal.isEmpty()){
+                   Toast.makeText(Login.this,"Enter your Email and Password", Toast.LENGTH_SHORT).show();
                }
-
-               if((usernameVal.toLowerCase().equals(registeredUserEmail.toLowerCase())&& passwordVal.equals(temporaryPassword))){
+               else if((usernameVal.toLowerCase().equals(registeredUserEmail.toLowerCase())&& passwordVal.equals(temporaryPassword))){
                Intent i = new Intent(Login.this, ChangePassword.class);
                startActivity(i);
                }
                else if((usernameVal.toLowerCase().equals(registeredUserEmail.toLowerCase())&& passwordVal.equals(registeredUserPass))){
+                   if(remember.isChecked()){
+                       Boolean boolIsChecked = remember.isChecked();
+                       SharedPreferences.Editor editor = preferences.edit();
+                       editor.putBoolean("remember", boolIsChecked);
+                       editor.apply();
+                   }
+
+
                    Intent i = new Intent(Login.this, MainActivity.class);
                    startActivity(i);
+
+                   etPass.getText().clear();
+                   etUser.getText().clear();
                }
                else{
                    Toast.makeText(Login.this, "Email and Password do not match!", Toast.LENGTH_SHORT).show();
@@ -90,5 +108,23 @@ public class Login extends AppCompatActivity{
           }
       });
     }
+
+    private void setRememberVariables() {
+
+        SharedPreferences sp = getSharedPreferences("UserInfo",0);
+        if(sp.contains("etUser")){
+            String u = sp.getString("etUser", "");
+            etUser.setText(u.toString());
+        }
+        if(sp.contains("etPass")){
+            String p = sp.getString("etPass", "");
+            etPass.setText(p.toString());
+        }
+        if(sp.contains("Remember")){
+            Boolean b = sp.getBoolean("Remember", false);
+            remember.setChecked(b);
+        }
+    }
+
 
 }

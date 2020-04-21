@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -12,19 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Settings.privacy"></activity>
+        <activity android:name=".Settings.NotificationPage"></activity>
+        <activity android:name=".Settings.ProfileFolder.ChangePasswordProfile" />
+        <activity android:name=".Settings.TermsOfService" />
+        <activity android:name=".Settings.ProfileFolder.ProfileInfo" />
+        <activity android:name=".Settings.settings" />
+        <activity android:name=".Settings.privacy" />
         <activity android:name=".Settings.preferances" />
-        <activity android:name=".Home.Budget.AccountPage" />
-        <activity android:name=".Home.Budget.History" />
-        <activity android:name=".Home.Paybills" />
-        <activity android:name=".Home.Budget.BudgetPage" />
-        <activity android:name=".Home.Budget.AddBox" />
+        <activity android:name=".MainPages.AccountPage" />
+        <activity android:name=".MainPages.History" />
+        <activity android:name=".MainPages.Paybills" />
+        <activity android:name=".MainPages.Budget.BudgetPage" />
         <activity android:name=".RergistrationAndLogin.ChangePassword" />
-        <activity android:name=".Home.SetupBudget" />
+        <activity android:name=".MainPages.SetupBudget" />
         <activity android:name=".RergistrationAndLogin.RecoveryMessage" />
         <activity android:name=".RergistrationAndLogin.RecoveryPass" />
         <activity android:name=".RergistrationAndLogin.Register" />
-        <activity android:name=".Home.MainActivity" />
+        <activity android:name=".MainPages.MainActivity" />
         <activity android:name=".RergistrationAndLogin.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

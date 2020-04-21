@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.bottomnamviagtionbar.Home.SetupBudget;
+import com.example.bottomnamviagtionbar.MainPages.SetupBudget;
 import com.example.bottomnamviagtionbar.R;
 
 public class Register extends AppCompatActivity{
@@ -20,6 +20,7 @@ public class Register extends AppCompatActivity{
     EditText _etName, etUser, etPass;
     Button bRegister;
     SharedPreferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,11 @@ public class Register extends AppCompatActivity{
                 String name = _etName.getText().toString();
                 String userVal = etUser.getText().toString();
                 String passVal = etPass.getText().toString();
-                if((userVal.length()>1)&& passVal.length()>5) {
+                String verification = preferences.getString("etUser","");
+                if(userVal.equals(verification)){
+                    Toast.makeText(Register.this, "An account with this email already exist!", Toast.LENGTH_SHORT).show();
+                }
+                else if((userVal.length()>1)&& passVal.length()>5) {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("etName", name);
                     editor.putString("etUser", userVal);

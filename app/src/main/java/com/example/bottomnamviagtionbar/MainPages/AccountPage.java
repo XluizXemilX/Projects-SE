@@ -1,11 +1,10 @@
-package com.example.bottomnamviagtionbar.Home;
+package com.example.bottomnamviagtionbar.MainPages;
 
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,31 +12,64 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
-import com.example.bottomnamviagtionbar.Home.Budget.AccountPage;
-import com.example.bottomnamviagtionbar.Home.Budget.BudgetPage;
-import com.example.bottomnamviagtionbar.Home.Budget.History;
+import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
+import com.example.bottomnamviagtionbar.Settings.NotificationPage;
+import com.example.bottomnamviagtionbar.BudgetVar;
+import com.example.bottomnamviagtionbar.Home.MainActivity;
+import com.example.bottomnamviagtionbar.Home.Paybills;
+import com.example.bottomnamviagtionbar.Home.SetupBudget;
 import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
+import com.example.bottomnamviagtionbar.Settings.settings;
 
-public class Paybills extends AppCompatActivity {
+public class AccountPage extends AppCompatActivity {
 
     //private ActionBar toolbar;
-    TextView logout;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_paybills);
+        setContentView(R.layout.activity_account);
+
+        BudgetVar BV = new BudgetVar();
+
+        TextView txtview = (TextView) findViewById(R.id.textMonthBudget);
+        float temp = BV.MonthlyLimit;
+        String tmp = Float.toString(temp);
+        txtview.setText(tmp);
+
+        TextView ttview = (TextView) findViewById(R.id.textWeeklyBudget);
+        float temp2 = BV.GetWeeklyLimit();
+        String tmp2 = Float.toString(temp2);
+        ttview.setText(tmp2);
+
+        TextView tview = (TextView) findViewById(R.id.textDailyBudget);
+        float temp3 = BV.GetDailyLimit();
+        String tmp3 = Float.toString(temp3);
+        tview.setText(tmp3);
+
 
         //toolbar = getSupportActionBar();
-        logout = (TextView)findViewById(R.id.tvLogout);
+
         Toolbar topbar = findViewById(R.id.topbar);
+        topbar.setTitle("Accounts");
         setSupportActionBar(topbar);
+        topbar.setNavigationIcon(R.drawable.ic_notifications_black_24dp);
+        topbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(AccountPage.this, NotificationPage.class);
+                startActivity(i);
+            }
+        });
 
         BottomNavigationView navigation = findViewById(R.id.navigationView);
+        Menu menu = navigation.getMenu();
+        MenuItem menuItem = menu.getItem(1);
+        menuItem.setChecked(true);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -46,35 +78,34 @@ public class Paybills extends AppCompatActivity {
                         //toolbar.setTitle("Home");
                         //loadFragment(new HomeFragment());
                         //return true;
-                        Intent i = new Intent(Paybills.this, MainActivity.class);
+                        Intent i = new Intent(AccountPage.this, MainActivity.class);
                         startActivity(i);
+                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.account:
                         //toolbar.setTitle("AccountPage");
                         //loadFragment(new AccountFragment());
                         //return true;
-                        Intent a = new Intent(Paybills.this, AccountPage.class);
-                        startActivity(a);
                         break;
                     case R.id.budget:
                         //toolbar.setTitle("Budget");
                         //loadFragment(new BudgetFragment());
                         //return true;
-                        Intent b = new Intent(Paybills.this, BudgetPage.class);
+                        Intent b = new Intent(AccountPage.this, BudgetPage.class);
                         startActivity(b);
                         break;
                     case R.id.history:
                         //toolbar.setTitle("History");
                         //loadFragment(new HistoryFragment());
                         //return true;
-                        Intent c = new Intent(Paybills.this, History.class);
+                        Intent c = new Intent(AccountPage.this, History.class);
                         startActivity(c);
                         break;
                     case R.id.paybills:
                         //toolbar.setTitle("PayBills");
                         //loadFragment(new PaybillsFragment());
                         //return true;
-                        Intent d = new Intent(Paybills.this, Paybills.class);
+                        Intent d = new Intent(AccountPage.this, Paybills.class);
                         startActivity(d);
                         break;
                 }
@@ -82,14 +113,8 @@ public class Paybills extends AppCompatActivity {
             }
         });
 
-         //toolbar.setTitle("Paybills");
-        logout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(Paybills.this, Login.class);
-                startActivity(i);
-            }
-        });
+         //toolbar.setTitle("Account");
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -98,5 +123,20 @@ public class Paybills extends AppCompatActivity {
         return true;
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item1:
+                Intent i = new Intent(this, settings.class);
+                startActivity(i);
+                break;
+            case R.id.item2:
+                Intent a = new Intent(this, Login.class);
+                startActivity(a);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
