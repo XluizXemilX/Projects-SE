@@ -1,9 +1,9 @@
 package com.example.bottomnamviagtionbar;
 
 public class BudgetVar {
-    public float MonthlyLimit;
-    public float WeeklyLimit;
-    public float DailyLimit;
+    public static float MonthlyLimit = 11111.11f;
+    public static float WeeklyLimit;// = 11111.11f;
+    public static float DailyLimit = 11111.11f;
 
     public void SetMonthlyLimit(float m){MonthlyLimit = m;}
     public void SetWeeklyLimit(float w){WeeklyLimit = w;}

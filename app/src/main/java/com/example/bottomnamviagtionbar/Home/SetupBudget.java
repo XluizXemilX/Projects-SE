@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.bottomnamviagtionbar.BudgetVar;
 import com.example.bottomnamviagtionbar.R;
@@ -32,23 +33,19 @@ public class SetupBudget extends AppCompatActivity {
         });
     }
     public void openMain(){
-        //temp1 = findViewById(R.id.Monthly_Limit).toString();
-        //temp2 = findViewById(R.id.Weekly_Limit).toString();
-        //temp3 = findViewById(R.id.Daily_Limit).toString();
+        temp1 = ((EditText)findViewById(R.id.Monthly_Limit)).getText().toString().trim();
+        temp2 = ((EditText)findViewById(R.id.Weekly_Limit)).getText().toString().trim();
+        temp3 = ((EditText)findViewById(R.id.Daily_Limit)).getText().toString().trim();
 
-        monthlyLim = Integer.parseInt(temp1); //I need to find a way to get the user input into a float and not a view
-        //WeeklyLim = Integer.parseInt(temp2);
-        //DailyLim = Integer.parseInt(temp3);
-
+        monthlyLim = Integer.decode(temp1);
+        WeeklyLim = Integer.decode(temp2);
+        DailyLim = Integer.decode(temp3);
 
         BudgetVar BV = new BudgetVar();
-        BV.SetMonthlyLimit(monthlyLim);
+        BV.MonthlyLimit = monthlyLim;
+        //BV.SetMonthlyLimit(monthlyLim);
         BV.SetWeeklyLimit(WeeklyLim);
         BV.SetDailyLimit(DailyLim);
-
-        System.out.print("Limits");
-        System.out.print(temp1);
-        System.out.print(WeeklyLim);
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
