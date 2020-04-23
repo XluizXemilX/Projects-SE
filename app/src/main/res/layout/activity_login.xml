@@ -104,6 +104,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.115"
-        app:srcCompat="@drawable/ic_account_info" />
+        app:srcCompat="@drawable/logo" />
 
 </android.support.constraint.ConstraintLayout>

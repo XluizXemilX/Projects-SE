@@ -14,30 +14,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Settings.NotificationPage"></activity>
+        <activity android:name=".RergistrationAndLogin.Login"/>
+        <activity android:name=".Settings.NotificationPage" />
         <activity android:name=".Settings.ProfileFolder.ChangePasswordProfile" />
         <activity android:name=".Settings.TermsOfService" />
         <activity android:name=".Settings.ProfileFolder.ProfileInfo" />
         <activity android:name=".Settings.settings" />
         <activity android:name=".Settings.privacy" />
         <activity android:name=".Settings.preferances" />
-        <activity android:name=".MainPages.AccountPage" />
+        <activity
+            android:name=".MainPages.AccountPage"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".MainPages.History" />
-        <activity android:name=".MainPages.Paybills" />
-        <activity android:name=".MainPages.Budget.BudgetPage" />
+        <activity
+            android:name=".MainPages.Paybills"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".MainPages.Budget.BudgetPage"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".RergistrationAndLogin.ChangePassword" />
         <activity android:name=".MainPages.SetupBudget" />
         <activity android:name=".RergistrationAndLogin.RecoveryMessage" />
         <activity android:name=".RergistrationAndLogin.RecoveryPass" />
         <activity android:name=".RergistrationAndLogin.Register" />
-        <activity android:name=".MainPages.MainActivity" />
-        <activity android:name=".RergistrationAndLogin.Login">
+        <activity
+            android:name=".MainPages.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

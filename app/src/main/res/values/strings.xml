@@ -22,11 +22,21 @@
     <string name="logout">Logout</string>
 
     <string-array name="spinner">
-        <item>Select</item>
-        <item>Weekly</item>
         <item>Monthly</item>
+        <item>Weekly</item>
+        <!--<item></item>-->
         <item>Yearly</item>
     </string-array>
+
+    <string-array name="categories">
+        <item>Rent</item>
+        <item>Services</item>
+        <item>Food</item>
+        <item>Entertainment</item>
+        <item>Clothes</item>
+        <item>Other</item>
+    </string-array>
+
     <string name="newPasswordMessage">Enter your new password</string>
     <string name="newPassword">New Password</string>
     <string name="ConfirmNP">Confirm Password</string>

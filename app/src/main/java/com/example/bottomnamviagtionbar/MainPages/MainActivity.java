@@ -3,11 +3,13 @@ package com.example.bottomnamviagtionbar.MainPages;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -49,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         preference = getSharedPreferences("UserInfo", 0);
         String BudVal = preference.getString("Income", "");
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar topbar = findViewById(R.id.topbar);
         topbar.setTitle("Home");
+        topbar.setTitleTextColor(0xFFFFFFFF);
         setSupportActionBar(topbar);
         topbar.setNavigationIcon(R.drawable.ic_notifications_black_24dp);
         topbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -78,36 +80,26 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        //toolbar.setTitle("Home");
-                        //loadFragment(new HomeFragment());
-                        //return true;
+
 
                         break;
                     case R.id.account:
-                        //toolbar.setTitle("AccountPage");
-                        //loadFragment(new AccountFragment());
-                        //return true;
+
                         Intent a = new Intent(MainActivity.this, AccountPage.class);
                         startActivity(a);
                         break;
                     case R.id.budget:
-                        //toolbar.setTitle("Budget");
-                        //loadFragment(new BudgetFragment());
-                        //return true;
+
                         Intent b = new Intent(MainActivity.this, BudgetPage.class);
                         startActivity(b);
                         break;
                     case R.id.history:
-                        //toolbar.setTitle("History");
-                        //loadFragment(new HistoryFragment());
-                        //return true;
+
                         Intent c = new Intent(MainActivity.this, History.class);
                         startActivity(c);
                         break;
                     case R.id.paybills:
-                        //toolbar.setTitle("PayBills");
-                        //loadFragment(new PaybillsFragment());
-                        //return true;
+
                         Intent d = new Intent(MainActivity.this, Paybills.class);
                         startActivity(d);
                         break;

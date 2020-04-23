@@ -34,6 +34,7 @@ public class Paybills extends AppCompatActivity {
 
         Toolbar topbar = findViewById(R.id.topbar);
         topbar.setTitle("Bills");
+        topbar.setTitleTextColor(0xFFFFFFFF);
         setSupportActionBar(topbar);
         topbar.setNavigationIcon(R.drawable.ic_notifications_black_24dp);
         topbar.setNavigationOnClickListener(new View.OnClickListener() {

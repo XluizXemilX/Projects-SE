@@ -1,6 +1,7 @@
 package com.example.bottomnamviagtionbar.MainPages;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
@@ -26,19 +28,20 @@ public class AccountPage extends AppCompatActivity {
     //private ActionBar toolbar;
 
 
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-
-
+        
 
         //toolbar = getSupportActionBar();
 
         Toolbar topbar = findViewById(R.id.topbar);
         topbar.setTitle("Accounts");
+        topbar.setTitleTextColor(0xFFFFFFFF);
         setSupportActionBar(topbar);
         topbar.setNavigationIcon(R.drawable.ic_notifications_black_24dp);
         topbar.setNavigationOnClickListener(new View.OnClickListener() {

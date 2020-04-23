@@ -1,54 +1,44 @@
 package com.example.bottomnamviagtionbar.Helpers;
 
-import android.widget.Spinner;
-import android.widget.Toast;
-
 public class SpinnersHelper {
-    Spinner spin;
 
-    float ConvertBudgetWeekly(int rate,float budget){
-        switch (rate){
-            case 0:
+    public float ConvertBudgetWeekly(int frequency,float budget){
+        switch (frequency){
+            case 0: // monthly
+                budget *= 4.348214;
                 break;
-            case 1:
+            case 1: // weekly
                 break;
-            case 2:
-                budget = budget/4;
-                break;
-            case 3:
-                budget = budget/52;
+            case 2: // yearly
+                budget *= 52.17857;
                 break;
         }
         return budget;
     }
 
-    float ConvertBudgetMonthly(int rate,float budget){
-        switch (rate){
-            case 0:
+    public float ConvertBudgetMonthly(int frequency, float budget){
+        switch (frequency){
+            case 0: // monthly
                 break;
-            case 1:
-                budget = budget * 4;
+            case 1: // weekly
+                budget /= 4.348214;
                 break;
-            case 2:
-                break;
-            case 3:
-                budget = budget/12;
+            case 2: // yearly
+                budget *= 12;
                 break;
         }
         return budget;
     }
 
-    float ConvertBudgetYearly(int rate,float budget){
-        switch (rate){
-            case 0:
+    public float ConvertBudgetYearly(int frequency,float budget){
+        switch (frequency){
+            case 0: // monthly
+                budget /= 12;
                 break;
-            case 1:
-                budget = budget * 52;
+            case 1: // weekly
+                budget /= 52.17857;
                 break;
-            case 2:
-                budget = budget * 12;
-                break;
-            case 3:
+            case 2: // yearly
                 break;
         }
         return budget;
