@@ -3,6 +3,7 @@ package com.example.bottomnamviagtionbar.MainPages;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
@@ -13,19 +14,25 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.bottomnamviagtionbar.Interfaces.Bill;
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
+import com.example.bottomnamviagtionbar.Settings.ModifyIncome;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.BudgetVar;
 
 import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
+import com.example.bottomnamviagtionbar.Settings.ProfileFolder.ProfileInfo;
 import com.example.bottomnamviagtionbar.Settings.settings;
 
 public class AccountPage extends AppCompatActivity {
 
     //private ActionBar toolbar;
+    TextView IncomeValue, BillValue, SavingsValue;
+    SharedPreferences preferences;
 
 
 
@@ -35,7 +42,34 @@ public class AccountPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        
+        preferences= getSharedPreferences("UserInfo", 0);
+        String incomeVal= preferences.getString("Income","");
+        String billVal = preferences.getString("Paid","");
+        String savingsVal = preferences.getString("Saving", "");
+        BillValue = findViewById(R.id.amount_Bills);
+        BillValue.setText("$" + billVal);
+        SavingsValue = findViewById(R.id.amount_Savings);
+        SavingsValue.setText("$" + savingsVal);
+        IncomeValue = findViewById(R.id.amount_Income);
+        IncomeValue.setText("$" + incomeVal);
+        IncomeValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(AccountPage.this, ModifyIncome.class);
+                startActivity(i);
+            }
+        });
+
+        BillValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(AccountPage.this, Paybills.class);
+                startActivity(i);
+            }
+        });
+
+
+        //Income.setText("text");
 
         //toolbar = getSupportActionBar();
 

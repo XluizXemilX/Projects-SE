@@ -24,8 +24,9 @@
     <string-array name="spinner">
         <item>Monthly</item>
         <item>Weekly</item>
-        <!--<item></item>-->
         <item>Yearly</item>
+        <item>Bi-Monthly</item>
+        <item>Bi-Weekly</item>
     </string-array>
 
     <string-array name="categories">
@@ -48,5 +49,6 @@
     <string name="value">$0.0</string>
     <string name="rent">Rent</string>
     <string name="CurrentPassword">Current Password</string>
+    <string name="money">$0.00</string>
 
 </resources>

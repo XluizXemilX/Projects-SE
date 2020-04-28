@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.bottomnamviagtionbar.Interfaces.Rent;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
 
 public class SplashScreen extends AppCompatActivity {
@@ -25,7 +26,6 @@ public class SplashScreen extends AppCompatActivity {
                 SplashScreen.this.finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
-
 
     }
 }

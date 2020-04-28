@@ -27,7 +27,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bottomnamviagtionbar.Helpers.Category;
+import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
 import com.example.bottomnamviagtionbar.Helpers.SpinnersHelper;
+import com.example.bottomnamviagtionbar.Interfaces.Bill;
 import com.example.bottomnamviagtionbar.MainPages.AccountPage;
 import com.example.bottomnamviagtionbar.MainPages.History;
 import com.example.bottomnamviagtionbar.MainPages.MainActivity;
@@ -46,16 +49,11 @@ public class BudgetPage extends AppCompatActivity {
     public enum Frequency {
         Monthly, // 0
         Weekly,
-        Yearly
+        Yearly,
+        Bi_Monthly,
+        Bi_Weekly
     }
-    public enum Category{
-        Rent,  //0
-        Services,
-        Food,
-        Entertainment,
-        Clothes,
-        Other
-    }
+
 
     TextView  result;
     Toolbar topbar;
@@ -66,16 +64,11 @@ public class BudgetPage extends AppCompatActivity {
     ArrayList<EditText> editTexts = new ArrayList<>();
     //ArrayList<EditText> Types = new ArrayList<EditText>();
     ArrayList<Spinner> spinners = new ArrayList<>();
-    // Categories
-    ArrayList<EditText> Rent = new ArrayList<>();
-    ArrayList<EditText> servies = new ArrayList<>();
-    ArrayList<EditText> Food = new ArrayList<>();
-    ArrayList<EditText> Entertainment = new ArrayList<>();
-    ArrayList<EditText> Clothes = new ArrayList<>();
-    ArrayList<EditText> Others = new ArrayList<>();
+    ArrayList<Bill> bills = new ArrayList<>();
     SharedPreferences preferences;
     Frequency current_frequency;
     SpinnersHelper spinnersHelper;
+
     Category current_category;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -144,10 +137,13 @@ public class BudgetPage extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.categories));
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         Spinner1.setAdapter(arrayAdapterCategories);
         spinners.add(Spinner1);
+        //spinnersHelper.SaveCategories(Spinner1,Category.values(),,Categories);
         Spinner2.setAdapter(arrayAdapterCategories);
         spinners.add(Spinner2);
+
 
 
         IncomeSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -219,6 +215,46 @@ public class BudgetPage extends AppCompatActivity {
 
                         break;
 
+                    case Bi_Weekly:
+                        for(EditText et : editTexts){
+                            String etString = et.getText().toString();
+                            if(etString.isEmpty())
+                            {
+                                continue;
+                            }
+
+                            float amount =  Float.valueOf(etString);
+                            amount = spinnersHelper.ConvertBudgetBiWeekly(i, amount);
+
+                            et.setText(String.format("%.2f",amount));
+                        }
+
+                        if(!BudgetString.isEmpty()){
+                            float value =  Float.valueOf(BudgetString);
+                            value = spinnersHelper.ConvertBudgetBiWeekly(i, value);
+                            MainBudget.setText(String.format("%.2f",value));
+                        }
+
+                        break;
+
+                    case Bi_Monthly:
+                        for(EditText et : editTexts){
+                            String etString = et.getText().toString();
+                            if(etString.isEmpty())
+                            {
+                                continue;
+                            }
+
+                            float amount =  Float.valueOf(etString);
+                            amount = spinnersHelper.ConvertBudgetBiMonthly(i, amount);
+                            et.setText(String.format("%.2f",amount));
+                        }
+                        if(!BudgetString.isEmpty()){
+                            float value =  Float.valueOf(BudgetString);
+                            value = spinnersHelper.ConvertBudgetBiMonthly(i, value);
+                            MainBudget.setText(String.format("%.2f", value));
+                        }
+                        break;
                     default:
 
                         break;
@@ -238,17 +274,29 @@ public class BudgetPage extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 float sum =0;
+                bills.clear();
 
-                for(EditText et : editTexts){
+                for(int i = 0; i < editTexts.size();i++){
+
+                    EditText et = editTexts.get(i);
                     String etString = et.getText().toString();
-                    if(etString.isEmpty())
+                    if(!etString.isEmpty())
                     {
-                        continue;
+                        float amount = Float.valueOf(etString);
+                        sum += amount;
+                        Spinner spinner = spinners.get(i);
+                        int spinnerPos = spinner.getSelectedItemPosition();
+                        Category catergories = Category.values()[spinnerPos];
+                        Bill _bill = new Bill();
+                        _bill.amount = amount;
+                        _bill.category = catergories;
+                        bills.add(_bill);
+
                     }
-
-                    sum += Float.valueOf(etString);
-
                 }
+
+
+
 
                 TextView result = findViewById(R.id.tvResult);
                 TextView TotalBud =findViewById(R.id.totaltv);
@@ -285,6 +333,7 @@ public class BudgetPage extends AppCompatActivity {
             }
 
         });
+
 
 
 
@@ -337,42 +386,53 @@ public class BudgetPage extends AppCompatActivity {
                  final LinearLayout layout = createLinearLayout();
                  layout.setOrientation(LinearLayout.HORIZONTAL);
 
-                 //bill name edittext creation
-                 final Spinner name = createdSpinner();
-                 name.setAdapter(arrayAdapterCategories);
+                 //bill category spinner creation
+                 final Spinner category = createdSpinner();
+                 category.setAdapter(arrayAdapterCategories);
+                 category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                     @Override
+                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                 //final EditText name = createEditText();
-                 //name.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+                     }
+
+                     @Override
+                     public void onNothingSelected(AdapterView<?> adapterView) {
+
+                     }
+                 });
+
 
                  //bill amount edittext creation
                  final EditText value = createEditText();
                  value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                  value.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(100,2)});
 
-                 //create the bill spinner
-                 //Spinner spin = createdSpinner();
-                 //spin.setAdapter(arrayAdapter);
 
                  //create the delete textview
                  TextView delete = createDeleteTv();
 
                  dynamicLayout =findViewById(R.id.linearLayoutDynamic);
-                 layout.addView(name);
+                 layout.addView(category);
                  layout.addView(value);
-                 //layout.addView(spin);
+
 
                  layout.addView(delete);
                  dynamicLayout.addView(layout);
                  editTexts.add(value);
+
+
                  //Types.add(name);
-                 spinners.add(name);
+                 spinners.add(category);
+
 
                  delete.setOnClickListener(new View.OnClickListener() {
                      @Override
                      public void onClick(View view) {
                          dynamicLayout.removeView(layout);
                          editTexts.remove(value);
-                         spinners.remove(name);
+                         spinners.remove(category);
+
+
                      }
                  });
              }
@@ -448,31 +508,8 @@ public class BudgetPage extends AppCompatActivity {
 
     }
 
-    //separates the bills categories
-    public void  CategoriesSelection( Spinner spin, EditText value){
-        switch(current_category){
-            case Rent:
-                Rent.add(value);
-                break;
-            case Services:
-                servies.add(value);
-                break;
-            case Food:
-                Food.add(value);
-                break;
-            case Entertainment:
-                Entertainment.add(value);
-                break;
-            case Clothes:
-                Clothes.add(value);
-                break;
-            case Other:
-                Others.add(value);
-                break;
 
-        }
 
-    }
 
 
 }

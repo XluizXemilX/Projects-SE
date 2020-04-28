@@ -1,4 +1,4 @@
-package com.example.bottomnamviagtionbar.MainPages;
+package com.example.bottomnamviagtionbar.Settings;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,26 +12,25 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.bottomnamviagtionbar.BudgetVar;
-import com.example.bottomnamviagtionbar.Helpers.DecimalDigitsInputFilter;
-import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
+import com.example.bottomnamviagtionbar.MainPages.AccountPage;
+import com.example.bottomnamviagtionbar.MainPages.MainActivity;
+import com.example.bottomnamviagtionbar.MainPages.SetupBudget;
 import com.example.bottomnamviagtionbar.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-public class SetupBudget extends AppCompatActivity {
+public class ModifyIncome extends AppCompatActivity {
     SharedPreferences preferences;
 
-    private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup_budget);
+        setContentView(R.layout.activity_modify_income);
 
-        Button Save = (Button)findViewById(R.id.TomainButton);
-        final EditText income = (EditText)findViewById(R.id.Monthly_Limit);
-        income.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(100,2)});
+        Button Save = (Button)findViewById(R.id.saveIncomeChange);
+        final EditText income = (EditText)findViewById(R.id.changeIncome);
+        income.setFilters(new InputFilter[] {new com.example.bottomnamviagtionbar.Helpers.DecimalDigitsInputFilter(100,2)});
         preferences = getSharedPreferences("UserInfo",0);
 
         Save.setOnClickListener(new View.OnClickListener(){
@@ -39,14 +38,16 @@ public class SetupBudget extends AppCompatActivity {
             public void onClick(View view){
                 String value = income.getText().toString();
                 if(value.isEmpty()){
-                    Toast.makeText(SetupBudget.this, "Enter an amount!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ModifyIncome.this, "Enter an amount!", Toast.LENGTH_SHORT).show();
                 }
                 else{
+
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("Income", value);
                     editor.apply();
-                    Intent i = new Intent(SetupBudget.this, MainActivity.class);
+                    Intent i = new Intent(ModifyIncome.this, AccountPage.class);
                     startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 }
             }
         });
@@ -54,5 +55,6 @@ public class SetupBudget extends AppCompatActivity {
     }
 
 }
+
 
 

@@ -139,19 +139,26 @@ public class MainActivity extends AppCompatActivity {
 
         Pie pie = AnyChart.pie();
         List<DataEntry>dataEntries= new ArrayList<>();
-        //Income
-        String val = preference.getString("Income", "");
-        Float income = Float.valueOf(val);
-        //Paid Bills
-        //String paid = preference.getString("Paid", "");
-        //Float paidB = Float.valueOf(paid);
-        ////left for speding or savings
-        //String save = preference.getString("Savings", "");
-        //Float savings = Float.valueOf(save);
 
-        dataEntries.add(new ValueDataEntry("Income", income));
-        //dataEntries.add(new ValueDataEntry("Bills",paidB));
-        //dataEntries.add(new ValueDataEntry("Saving", savings));
+        //Income
+        //String val = preference.getString("Income", "");
+        //if(!val.isEmpty()){
+        //    Float income = Float.valueOf(val);
+        //    dataEntries.add(new ValueDataEntry("Income", income));
+        //}
+        //Paid Bill
+        String paid = preference.getString("Paid", "");
+        if(!paid.isEmpty()){
+            Float paidB = Float.valueOf(paid);
+            dataEntries.add(new ValueDataEntry("Bill",paidB));
+        }
+        ////left for speding or savings
+        String save = preference.getString("Saving", "");
+        if(!save.isEmpty()) {
+            Float savings = Float.valueOf(save);
+            dataEntries.add(new ValueDataEntry("Savings", savings));
+
+        }
         pie.data(dataEntries);
         pieChart.setChart(pie);
 
