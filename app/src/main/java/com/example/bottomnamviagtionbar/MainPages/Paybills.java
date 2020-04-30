@@ -8,10 +8,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
@@ -19,14 +24,31 @@ import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
 import com.example.bottomnamviagtionbar.Settings.settings;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Paybills extends AppCompatActivity {
 
     //private ActionBar toolbar;
+    public enum Category{
+        Rent,  //0
+        Services,
+        Food,
+        Entertainment,
+        Clothes,
+        Other
+    }
+    Spinner spinner;
+    EditText amount;
+    Button Addbill;
+    ArrayList<String> History;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paybills);
 
@@ -42,6 +64,35 @@ public class Paybills extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(Paybills.this, NotificationPage.class);
                 startActivity(i);
+            }
+        });
+
+        spinner = findViewById(R.id.spinner1);
+        amount = findViewById(R.id.etAmount);
+        amount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(100,2)});
+        Addbill = findViewById(R.id.addbillbutton);
+        final ArrayAdapter<String> arrayAdapterCategories = new ArrayAdapter<String>(
+                Paybills.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.categories));
+        arrayAdapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapterCategories);
+        Addbill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Converting input to string getting ready for format.
+                //Format: ("Type of expense"  "Amount"  "Date & Time")
+                //Amount to string
+                String temp = amount.getText().toString();
+                //Date and time into string
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date date = new Date();
+                String DateATime = formatter.format(date);
+                //Expense Type to string
+                String ExpenseType = spinner.getSelectedView().toString();
+                //Final string adding all parts.
+                String HistoryString;// = ExpenseType + " " + temp + " " + DateATime;
+                //History.add(HistoryString);
             }
         });
 
