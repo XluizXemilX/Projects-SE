@@ -17,7 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.example.bottomnamviagtionbar.Helpers.DecimalDigitsInputFilter;
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.R;
@@ -69,7 +71,7 @@ public class Paybills extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinner1);
         amount = findViewById(R.id.etAmount);
-        amount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(100,2)});
+        amount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(100,2)});
         Addbill = findViewById(R.id.addbillbutton);
         final ArrayAdapter<String> arrayAdapterCategories = new ArrayAdapter<String>(
                 Paybills.this,
@@ -84,15 +86,39 @@ public class Paybills extends AppCompatActivity {
                 //Format: ("Type of expense"  "Amount"  "Date & Time")
                 //Amount to string
                 String temp = amount.getText().toString();
+                if (temp.length() == 0){
+                    temp = "0.00";
+                }
                 //Date and time into string
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 Date date = new Date();
                 String DateATime = formatter.format(date);
                 //Expense Type to string
-                String ExpenseType = spinner.getSelectedView().toString();
+                int ExpenseTypePosition = spinner.getSelectedItemPosition();
+                String ExpenseType;
+                if (ExpenseTypePosition == 0){
+                    ExpenseType = "Rent";
+                }
+                else if (ExpenseTypePosition == 1){
+                    ExpenseType = "Services";
+                }
+                else if (ExpenseTypePosition == 2){
+                    ExpenseType = "Food";
+                }
+                else if (ExpenseTypePosition == 3){
+                    ExpenseType = "Entertainment";
+                }
+                else if (ExpenseTypePosition == 4){
+                    ExpenseType = "Clothes";
+                }
+                else{
+                    ExpenseType = "Other";
+                }
                 //Final string adding all parts.
-                String HistoryString;// = ExpenseType + " " + temp + " " + DateATime;
+                String HistoryString = ExpenseType + " for $" + temp + " at " + DateATime;
                 //History.add(HistoryString);
+                TextView txt = (TextView) findViewById(R.id.HView);
+                txt.setText(HistoryString);
             }
         });
 
