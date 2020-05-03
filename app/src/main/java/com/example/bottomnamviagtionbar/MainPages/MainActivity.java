@@ -24,6 +24,7 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
+import com.example.bottomnamviagtionbar.Helpers.PieChartData;
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.R;
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
         //chart
         pieChart = findViewById(R.id.any_chart_view);
-        setPieChart();
+        PieChartData chart = new PieChartData();
+        chart.setPieChart(preference,pieChart);
 
         Toolbar topbar = findViewById(R.id.topbar);
         topbar.setTitle("Home");
@@ -134,34 +136,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //chart method
-    public void setPieChart(){
 
-        Pie pie = AnyChart.pie();
-        List<DataEntry>dataEntries= new ArrayList<>();
-
-        //Income
-        //String val = preference.getString("Income", "");
-        //if(!val.isEmpty()){
-        //    Float income = Float.valueOf(val);
-        //    dataEntries.add(new ValueDataEntry("Income", income));
-        //}
-        //Paid Bill
-        String paid = preference.getString("Paid", "");
-        if(!paid.isEmpty()){
-            Float paidB = Float.valueOf(paid);
-            dataEntries.add(new ValueDataEntry("Bill",paidB));
-        }
-        ////left for speding or savings
-        String save = preference.getString("Saving", "");
-        if(!save.isEmpty()) {
-            Float savings = Float.valueOf(save);
-            dataEntries.add(new ValueDataEntry("Savings", savings));
-
-        }
-        pie.data(dataEntries);
-        pieChart.setChart(pie);
-
-    }
     
 }

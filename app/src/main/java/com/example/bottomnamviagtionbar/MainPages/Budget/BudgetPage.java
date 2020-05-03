@@ -27,8 +27,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Pie;
 import com.example.bottomnamviagtionbar.Helpers.Category;
+import com.example.bottomnamviagtionbar.Helpers.DecimalDigitsInputFilter;
 import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
+import com.example.bottomnamviagtionbar.Helpers.PieChartData;
 import com.example.bottomnamviagtionbar.Helpers.SpinnersHelper;
 import com.example.bottomnamviagtionbar.Interfaces.Bill;
 import com.example.bottomnamviagtionbar.MainPages.AccountPage;
@@ -41,6 +48,7 @@ import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.Settings.settings;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,14 +70,13 @@ public class BudgetPage extends AppCompatActivity {
     LinearLayout dynamicLayout;
     Spinner Spinner1, Spinner2, IncomeSpin;
     ArrayList<EditText> editTexts = new ArrayList<>();
-    //ArrayList<EditText> Types = new ArrayList<EditText>();
+
     ArrayList<Spinner> spinners = new ArrayList<>();
     ArrayList<Bill> bills = new ArrayList<>();
     SharedPreferences preferences;
     Frequency current_frequency;
     SpinnersHelper spinnersHelper;
 
-    Category current_category;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -78,6 +85,7 @@ public class BudgetPage extends AppCompatActivity {
         setContentView(R.layout.activity_budget_page);
 
 
+        //setPieChart();
 
 
         topbar = findViewById(R.id.topbar);
@@ -97,11 +105,8 @@ public class BudgetPage extends AppCompatActivity {
         calculate=findViewById(R.id.btnCalculate);
         result = findViewById(R.id.tvResult);
 
-        //default fields
-        //Type = findViewById(R.id.etType);
         Amount = findViewById(R.id.etAmount);
         Amount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(100,2)});
-        //Type2 = findViewById(R.id.etType2);
         Amount2 = findViewById(R.id.etAmount2);
         Amount2.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(100,2)});
         Spinner1 = findViewById(R.id.spinner1);
@@ -140,7 +145,7 @@ public class BudgetPage extends AppCompatActivity {
 
         Spinner1.setAdapter(arrayAdapterCategories);
         spinners.add(Spinner1);
-        //spinnersHelper.SaveCategories(Spinner1,Category.values(),,Categories);
+
         Spinner2.setAdapter(arrayAdapterCategories);
         spinners.add(Spinner2);
 
@@ -293,7 +298,32 @@ public class BudgetPage extends AppCompatActivity {
                         bills.add(_bill);
 
                     }
+
                 }
+
+                HelperFunctions helper = new HelperFunctions();
+                float[] categoryValues = helper.AddCategories(bills);
+                String rent = String.valueOf(categoryValues[0]);
+                editor.putString("Rent_Ex", rent);
+                String services = String.valueOf(categoryValues[1]);
+                editor.putString("Services_Ex", services);
+                String food = String.valueOf(categoryValues[2]);
+                editor.putString("Food_Ex", food);
+                String entertain = String.valueOf(categoryValues[3]);
+                editor.putString("Entertainment_Ex", entertain);
+                String clothes = String.valueOf(categoryValues[4]);
+                editor.putString("Clothes_Ex", clothes);
+                String other = String.valueOf(categoryValues[5]);
+                editor.putString("Other_Ex", other);
+                String total = "You have $";
+                String budget = MainBudget.getText().toString();
+                String savings = String.valueOf(Float.valueOf(budget) - sum);
+                editor.putString("Saving", savings);
+                String paid = String.valueOf(sum);
+                editor.putString("Paid", paid);
+                editor.apply();
+
+                //
 
 
 
@@ -302,13 +332,7 @@ public class BudgetPage extends AppCompatActivity {
                 TextView TotalBud =findViewById(R.id.totaltv);
                 TextView Projected =findViewById(R.id.ProjectedSaving);
 
-                String total = "You have $";
-                String budget = MainBudget.getText().toString();
-                String savings = String.valueOf(Float.valueOf(budget) - sum);
-                editor.putString("Saving", savings);
-                String paid = String.valueOf(sum);
-                editor.putString("Paid", paid);
-                editor.apply();
+
 
                 if(budget.isEmpty()){
                     Toast.makeText(BudgetPage.this, "Enter a budget amount.",Toast.LENGTH_SHORT).show();
@@ -329,6 +353,11 @@ public class BudgetPage extends AppCompatActivity {
                     Projected.setText("Projected Savings\n$"+String.format("%.2f",Float.valueOf(budget) - sum));
                     Projected.setBackgroundDrawable(getResources().getDrawable(R.drawable.box));
                 }
+
+                //chart
+                AnyChartView pieChart = findViewById(R.id.any_chart_view_budget);
+                PieChartData data = new PieChartData();
+                data.setPieChart(preferences,pieChart);
 
             }
 
