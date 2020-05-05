@@ -41,9 +41,9 @@ public class Paybills extends AppCompatActivity {
         Clothes,
         Other
     }
-    Spinner spinner;
-    EditText amount;
-    Button Addbill;
+    Spinner spinner,spinnermonth,spinnertype;
+    EditText amount,AddAmount,RecurAmount;
+    Button Addbill,AddBalance,RecurBill;
     ArrayList<String> History;
 
 
@@ -119,9 +119,102 @@ public class Paybills extends AppCompatActivity {
                 //History.add(HistoryString);
                 TextView txt = (TextView) findViewById(R.id.HView);
                 txt.setText(HistoryString);
+
+
+
             }
         });
 
+        ///////////////////////////////////////////////////////////////////////////
+        AddAmount = findViewById(R.id.AddBalanceAmount);
+        AddAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(100,2)});
+        AddBalance = findViewById(R.id.AddBalanceButton);
+        AddBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                //Adding amount for adding to budget
+                String temp = AddAmount.getText().toString();
+                if(temp.length() == 0){
+                    temp = "0.00";
+                }
+                //Date and Time format
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date date = new Date();
+                String DateATime = formatter.format(date);
+                //History String
+                String HistoryString = "+$" + temp + " at " + DateATime + ".\n New Balance ";
+                //History.add(HistoryString);
+                TextView txt = (TextView) findViewById(R.id.AddBalanceTextView);
+                txt.setText(HistoryString);
+            }
+        });
+        ///////////////////////////////////////////////////////////////////////////
+        spinnermonth = findViewById(R.id.spinner3);
+        spinnertype = findViewById(R.id.spinner4);
+        final ArrayAdapter<String> ArrayAdapterCategories = new ArrayAdapter<>(
+                Paybills.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.spinner));
+        ArrayAdapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnertype.setAdapter(arrayAdapterCategories);
+        spinnermonth.setAdapter(ArrayAdapterCategories);
+        RecurAmount = findViewById(R.id.editText3);
+        RecurAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(100,2)});
+        RecurBill = findViewById(R.id.AddRecurrBill);
+        RecurBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Recurring Amount
+                String temp = RecurAmount.getText().toString();
+                if (temp.length() == 0){
+                    temp = "0.00";
+                }
+                //If statements for spinners(kinda Retarted)
+                int ExpenseTypePosition = spinnertype.getSelectedItemPosition();
+                String ExpenseType;
+                if (ExpenseTypePosition == 0){
+                    ExpenseType = "Rent";
+                }
+                else if (ExpenseTypePosition == 1){
+                    ExpenseType = "Services";
+                }
+                else if (ExpenseTypePosition == 2){
+                    ExpenseType = "Food";
+                }
+                else if (ExpenseTypePosition == 3){
+                    ExpenseType = "Entertainment";
+                }
+                else if (ExpenseTypePosition == 4){
+                    ExpenseType = "Clothes";
+                }
+                else{
+                    ExpenseType = "Other";
+                }
+                int ExpenseRecurPosition = spinnermonth.getSelectedItemPosition();
+                String ExpenseRecur;
+                if (ExpenseRecurPosition == 0){
+                    ExpenseRecur = "Monthly";
+                }
+                else if (ExpenseRecurPosition == 1){
+                    ExpenseRecur = "Weekly";
+                }
+                else if (ExpenseRecurPosition == 2){
+                    ExpenseRecur = "Yearly";
+                }
+                else if (ExpenseRecurPosition == 3){
+                    ExpenseRecur = "Bi-Monthly";
+                }
+                else {
+                    ExpenseRecur = "Bi-Weekly";
+                }
+                //Date and Time format
+                String HistoryString = ExpenseType + " = Type " + temp + " = Amount " + ExpenseRecur + " = Recur";
+                TextView txt = (TextView) findViewById(R.id.TempView3);
+                txt.setText(HistoryString);
+            }
+        });
+
+        ///////////////////////////////////////////////////////////////////////////
         BottomNavigationView navigation = findViewById(R.id.navigationView);
         Menu menu = navigation.getMenu();
         MenuItem menuItem = menu.getItem(4);
