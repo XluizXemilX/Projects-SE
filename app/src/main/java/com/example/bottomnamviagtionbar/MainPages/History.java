@@ -44,6 +44,9 @@ public class History extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        //////////////////////////////
+
+        //////////////////////////////
 
         BottomNavigationView navigation = findViewById(R.id.navigationView);
         Menu menu = navigation.getMenu();

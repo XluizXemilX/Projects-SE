@@ -29,6 +29,7 @@ import com.example.bottomnamviagtionbar.Settings.settings;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Paybills extends AppCompatActivity {
 
@@ -44,7 +45,7 @@ public class Paybills extends AppCompatActivity {
     Spinner spinner,spinnermonth,spinnertype;
     EditText amount,AddAmount,RecurAmount;
     Button Addbill,AddBalance,RecurBill;
-    ArrayList<String> History;
+    public static List<String> History = new ArrayList<>();
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -116,7 +117,7 @@ public class Paybills extends AppCompatActivity {
                 }
                 //Final string adding all parts.
                 String HistoryString = ExpenseType + " for $" + temp + " at " + DateATime;
-                //History.add(HistoryString);
+                History.add(HistoryString);
                 TextView txt = (TextView) findViewById(R.id.HView);
                 txt.setText(HistoryString);
 
@@ -143,7 +144,7 @@ public class Paybills extends AppCompatActivity {
                 String DateATime = formatter.format(date);
                 //History String
                 String HistoryString = "+$" + temp + " at " + DateATime + ".\n New Balance ";
-                //History.add(HistoryString);
+                History.add(HistoryString);
                 TextView txt = (TextView) findViewById(R.id.AddBalanceTextView);
                 txt.setText(HistoryString);
             }
@@ -169,7 +170,7 @@ public class Paybills extends AppCompatActivity {
                 if (temp.length() == 0){
                     temp = "0.00";
                 }
-                //If statements for spinners(kinda Retarted)
+                //If statements for spinners
                 int ExpenseTypePosition = spinnertype.getSelectedItemPosition();
                 String ExpenseType;
                 if (ExpenseTypePosition == 0){
@@ -209,6 +210,7 @@ public class Paybills extends AppCompatActivity {
                 }
                 //Date and Time format
                 String HistoryString = ExpenseType + " = Type " + temp + " = Amount " + ExpenseRecur + " = Recur";
+                History.add(HistoryString);
                 TextView txt = (TextView) findViewById(R.id.TempView3);
                 txt.setText(HistoryString);
             }
