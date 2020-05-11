@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -76,6 +77,17 @@ public class BudgetPage extends AppCompatActivity {
     SharedPreferences preferences;
     Frequency current_frequency;
     SpinnersHelper spinnersHelper;
+    float[] categoryValues;
+
+    AnyChartView pieChart;
+    PieChartData data;
+    Pie pie;
+
+
+    public float[] GetCatergoyValue()
+    {
+        return categoryValues;
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -84,7 +96,10 @@ public class BudgetPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget_page);
 
-
+        pieChart = findViewById(R.id.any_chart_view_budget);
+        pie = AnyChart.pie();
+        pieChart.setChart(pie);
+        data = new PieChartData();
         //setPieChart();
 
 
@@ -275,6 +290,8 @@ public class BudgetPage extends AppCompatActivity {
 
 
 
+
+
         calculate.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -302,7 +319,9 @@ public class BudgetPage extends AppCompatActivity {
                 }
 
                 HelperFunctions helper = new HelperFunctions();
-                float[] categoryValues = helper.AddCategories(bills);
+                categoryValues = helper.AddCategories(bills);
+
+
                 String rent = String.valueOf(categoryValues[0]);
                 editor.putString("Rent_Ex", rent);
                 String services = String.valueOf(categoryValues[1]);
@@ -317,11 +336,14 @@ public class BudgetPage extends AppCompatActivity {
                 editor.putString("Other_Ex", other);
                 String total = "You have $";
                 String budget = MainBudget.getText().toString();
-                String savings = String.valueOf(Float.valueOf(budget) - sum);
-                editor.putString("Saving", savings);
-                String paid = String.valueOf(sum);
-                editor.putString("Paid", paid);
-                editor.apply();
+                if(!TextUtils.isEmpty(budget)){
+                    String savings = String.valueOf(Float.valueOf(budget) - sum);
+                    editor.putString("Saving", savings);
+
+                    String paid = String.valueOf(sum);
+                    editor.putString("Paid", paid);
+                }
+                editor.commit();
 
                 //
 
@@ -355,9 +377,9 @@ public class BudgetPage extends AppCompatActivity {
                 }
 
                 //chart
-                AnyChartView pieChart = findViewById(R.id.any_chart_view_budget);
-                PieChartData data = new PieChartData();
-                data.setPieChart(preferences,pieChart);
+
+                data.setPieChart(preferences,pie);
+
 
             }
 
@@ -537,8 +559,57 @@ public class BudgetPage extends AppCompatActivity {
 
     }
 
-
-
-
+    //public void setPieChart(float sum) {
+    //    Pie pie = AnyChart.pie();
+    //    List<DataEntry> dataEntries= new ArrayList<>();
+//
+//
+    //    //Paid Bill
+    //    // String paid = preference.getString("Paid", "");
+    //    // if(!paid.isEmpty()){
+    //    //     Float paidB = Float.valueOf(paid);
+    //    //     dataEntries.add(new ValueDataEntry("Bill",paidB));
+    //    // }
+    //    //Rent
+//
+    //    Float rent = categoryValues[0];
+    //    if(rent !=0){
+    //        dataEntries.add(new ValueDataEntry("Rent", rent));
+    //    }
+    //    Float services = categoryValues[1];
+    //    if(services !=0){
+    //        dataEntries.add(new ValueDataEntry("Services", services));
+    //    }
+    //    Float food = categoryValues[2];
+    //    if(food !=0){
+    //        dataEntries.add(new ValueDataEntry("Food", food));
+    //    }
+    //    Float entertainment = categoryValues[3];
+    //    if(entertainment !=0){
+    //        dataEntries.add(new ValueDataEntry("Entertainment", entertainment));
+    //    }
+    //    Float clothes = categoryValues[4];
+    //    if(clothes !=0){
+    //        dataEntries.add(new ValueDataEntry("Clothes", clothes));
+    //    }
+    //    Float others = categoryValues[5];
+    //    if(others !=0){
+    //        dataEntries.add(new ValueDataEntry("Other", others));
+    //    }
+//
+    //    String budget = MainBudget.getText().toString();
+    //    String savings = String.valueOf(Float.valueOf(budget) - sum);
+//
+    //    ////left for speding or savings
+//
+    //    if(!savings.isEmpty()) {
+    //        Float saving = Float.valueOf(savings);
+    //        dataEntries.add(new ValueDataEntry("Savings", saving));
+//
+    //    }
+//
+    //    pie.data(dataEntries);
+    //    pieChart.setChart(pie);
+    //}
 
 }

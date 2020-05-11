@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     CalendarView calendar;
     SharedPreferences preference;
     AnyChartView pieChart;
+    Pie pie;
 
 
 
@@ -57,8 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         //chart
         pieChart = findViewById(R.id.any_chart_view);
+        pie = AnyChart.pie();
+        pieChart.setChart(pie);
         PieChartData chart = new PieChartData();
-        chart.setPieChart(preference,pieChart);
+        chart.setPieChart(preference, pie);
 
         Toolbar topbar = findViewById(R.id.topbar);
         topbar.setTitle("Home");

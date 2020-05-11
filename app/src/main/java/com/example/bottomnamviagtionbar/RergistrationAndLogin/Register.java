@@ -1,5 +1,6 @@
 package com.example.bottomnamviagtionbar.RergistrationAndLogin;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bottomnamviagtionbar.Interfaces.User;
 import com.example.bottomnamviagtionbar.MainPages.SetupBudget;
 import com.example.bottomnamviagtionbar.R;
 
 public class Register extends AppCompatActivity{
 
 
-
-    private static final int WRITE_EXTERNAL_STORAGE_CODE = 1;
     EditText _etName, etUser, etPass;
     Button bRegister;
     SharedPreferences preferences;
@@ -62,4 +62,24 @@ public class Register extends AppCompatActivity{
 
     }
 
+    public void saveInfo(View view, User[] userList)
+    {
+        for (int i = 0; i < userList.length; i++) {
+            User user = userList[i];
+
+            // I am creating a new shared prefence for each user!
+            // by their username.
+            SharedPreferences sharedPref = getSharedPreferences("userInfo_" + user.email.trim(), Context.MODE_PRIVATE);
+
+            SharedPreferences.Editor editor = sharedPref.edit();
+
+            editor.putString("name", user.name);
+            editor.putString("email", user.email);
+            editor.putString("password", user.password);
+            editor.apply();
+        }
+    }
+
 }
+
+

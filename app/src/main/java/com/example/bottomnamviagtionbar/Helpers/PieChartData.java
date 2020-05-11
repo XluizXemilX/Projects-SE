@@ -1,6 +1,7 @@
 package com.example.bottomnamviagtionbar.Helpers;
 
 import android.content.SharedPreferences;
+import android.os.Handler;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -8,15 +9,16 @@ import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
 import com.example.bottomnamviagtionbar.Interfaces.Services;
+import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PieChartData {
 
-    public void setPieChart(SharedPreferences preferences, AnyChartView pieChart) {
-        Pie pie = AnyChart.pie();
-        List<DataEntry> dataEntries= new ArrayList<>();
+    public void setPieChart(SharedPreferences preferences, final  Pie pie) {
+
+        final List<DataEntry> dataEntries= new ArrayList<>();
 
 
         //Paid Bill
@@ -69,7 +71,12 @@ public class PieChartData {
 
         }
 
-        pie.data(dataEntries);
-        pieChart.setChart(pie);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pie.data(dataEntries);
+
+            }
+        }, 1000);
     }
 }
