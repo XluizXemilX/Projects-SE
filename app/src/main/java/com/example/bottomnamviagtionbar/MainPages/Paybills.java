@@ -1,6 +1,7 @@
 package com.example.bottomnamviagtionbar.MainPages;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -19,9 +20,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.bottomnamviagtionbar.Helpers.Category;
 import com.example.bottomnamviagtionbar.Helpers.DecimalDigitsInputFilter;
+import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
+import com.example.bottomnamviagtionbar.Interfaces.Bill;
 import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
 import com.example.bottomnamviagtionbar.Settings.settings;
@@ -45,8 +49,17 @@ public class Paybills extends AppCompatActivity {
     Spinner spinner,spinnermonth,spinnertype;
     EditText amount,AddAmount,RecurAmount;
     Button Addbill,AddBalance,RecurBill;
+    SharedPreferences preferences;
+    float[] categoryValues;
+    ArrayList<Bill> bills = new ArrayList<>();
     public static List<String> History = new ArrayList<>();
+    ArrayList<Spinner> spinners = new ArrayList<>();
+    ArrayList<EditText> editTexts = new ArrayList<>();
 
+    public float[] GetCatergoyValue()
+    {
+        return categoryValues;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -70,6 +83,8 @@ public class Paybills extends AppCompatActivity {
             }
         });
 
+        preferences = getSharedPreferences("UserInfo", 0);
+        final String Teemp = preferences.getString("Income", "");
         spinner = findViewById(R.id.spinner1);
         amount = findViewById(R.id.etAmount);
         amount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(100,2)});
@@ -80,9 +95,12 @@ public class Paybills extends AppCompatActivity {
                 getResources().getStringArray(R.array.categories));
         arrayAdapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapterCategories);
+        spinners.add(spinner);
+        editTexts.add(amount);
         Addbill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                bills.clear();
                 //Converting input to string getting ready for format.
                 //Format: ("Type of expense"  "Amount"  "Date & Time")
                 //Amount to string
@@ -95,28 +113,55 @@ public class Paybills extends AppCompatActivity {
                 Date date = new Date();
                 String DateATime = formatter.format(date);
                 //Expense Type to string
-                int ExpenseTypePosition = spinner.getSelectedItemPosition();
-                String ExpenseType;
-                if (ExpenseTypePosition == 0){
-                    ExpenseType = "Rent";
+
+
+                float sum =0;
+                bills.clear();
+
+                for(int i = 0; i < editTexts.size();i++) {
+                    EditText et = editTexts.get(i);
+                    String etString = et.getText().toString();
+                    if(!etString.isEmpty())
+                    {
+                        float amount = Float.valueOf(etString);
+                        sum += amount;
+                        Spinner spinner = spinners.get(i);
+                        int spinnerPos = spinner.getSelectedItemPosition();
+                        com.example.bottomnamviagtionbar.Helpers.Category catergories = com.example.bottomnamviagtionbar.Helpers.Category.values()[spinnerPos];
+                        Bill _bill = new Bill();
+                        _bill.amount = amount;
+                        _bill.category = catergories;
+                        bills.add(_bill);
+
+                    }
                 }
-                else if (ExpenseTypePosition == 1){
-                    ExpenseType = "Services";
-                }
-                else if (ExpenseTypePosition == 2){
-                    ExpenseType = "Food";
-                }
-                else if (ExpenseTypePosition == 3){
-                    ExpenseType = "Entertainment";
-                }
-                else if (ExpenseTypePosition == 4){
-                    ExpenseType = "Clothes";
-                }
-                else{
-                    ExpenseType = "Other";
-                }
+
+
+
+
+
+
+
+                SharedPreferences.Editor editor = preferences.edit();
+                HelperFunctions helper = new HelperFunctions();
+                categoryValues = helper.AddCategories(bills);
+
+
+                String rent = String.valueOf(categoryValues[0]);
+                editor.putString("Rent_Ex", rent);
+                String services = String.valueOf(categoryValues[1]);
+                editor.putString("Services_Ex", services);
+                String food = String.valueOf(categoryValues[2]);
+                editor.putString("Food_Ex", food);
+                String entertain = String.valueOf(categoryValues[3]);
+                editor.putString("Entertainment_Ex", entertain);
+                String clothes = String.valueOf(categoryValues[4]);
+                editor.putString("Clothes_Ex", clothes);
+                String other = String.valueOf(categoryValues[5]);
+                editor.putString("Other_Ex", other);
+                editor.commit();
                 //Final string adding all parts.
-                String HistoryString = ExpenseType + " for $" + temp + " at " + DateATime;
+                String HistoryString =  " for $" + temp + " at " + DateATime;
                 History.add(HistoryString);
                 TextView txt = (TextView) findViewById(R.id.HView);
                 txt.setText(HistoryString);
@@ -143,12 +188,21 @@ public class Paybills extends AppCompatActivity {
                 Date date = new Date();
                 String DateATime = formatter.format(date);
                 //History String
-                String HistoryString = "+$" + temp + " at " + DateATime + ".\n New Balance ";
+                Double NewBudget = Double.parseDouble(Teemp);
+                Double OldBudget = Double.parseDouble(temp);
+                NewBudget += OldBudget;
+                String TTTT = String.valueOf(NewBudget);
+                SharedPreferences.Editor Edit = preferences.edit();
+                Edit.putString("Income",TTTT);
+                Edit.apply();
+
+                String HistoryString = "+$" + temp + " at " + DateATime + ".\n New Balance " + NewBudget;
                 History.add(HistoryString);
                 TextView txt = (TextView) findViewById(R.id.AddBalanceTextView);
                 txt.setText(HistoryString);
             }
         });
+
         ///////////////////////////////////////////////////////////////////////////
         spinnermonth = findViewById(R.id.spinner3);
         spinnertype = findViewById(R.id.spinner4);
