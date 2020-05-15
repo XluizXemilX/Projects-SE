@@ -46,7 +46,7 @@ public class Paybills extends AppCompatActivity {
         Clothes,
         Other
     }
-    Spinner spinner,spinnermonth,spinnertype;
+    Spinner spinner,spinnermonth,spinnertype,Monthspinner,Dayspinner;
     EditText amount,AddAmount,RecurAmount;
     Button Addbill,AddBalance,RecurBill;
     SharedPreferences preferences;
@@ -86,9 +86,18 @@ public class Paybills extends AppCompatActivity {
         preferences = getSharedPreferences("UserInfo", 0);
         final String Teemp = preferences.getString("Income", "");
         spinner = findViewById(R.id.spinner1);
+        Monthspinner = findViewById(R.id.MonthSpinner);
+        Dayspinner = findViewById(R.id.DaySpinner);
         amount = findViewById(R.id.etAmount);
         amount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(100,2)});
         Addbill = findViewById(R.id.addbillbutton);
+        final ArrayAdapter<String> MonthCatagory = new ArrayAdapter<>(
+                Paybills.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.Months)
+        );
+        Monthspinner.setAdapter(MonthCatagory);
+        MonthCatagory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final ArrayAdapter<String> arrayAdapterCategories = new ArrayAdapter<String>(
                 Paybills.this,
                 android.R.layout.simple_list_item_1,
