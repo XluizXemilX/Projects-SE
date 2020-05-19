@@ -98,6 +98,13 @@ public class Paybills extends AppCompatActivity {
         );
         Monthspinner.setAdapter(MonthCatagory);
         MonthCatagory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final ArrayAdapter<String> DayCatagory = new ArrayAdapter<>(
+                Paybills.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.Dates)
+        );
+        Dayspinner.setAdapter(DayCatagory);
+        DayCatagory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final ArrayAdapter<String> arrayAdapterCategories = new ArrayAdapter<String>(
                 Paybills.this,
                 android.R.layout.simple_list_item_1,
@@ -170,7 +177,27 @@ public class Paybills extends AppCompatActivity {
                 editor.putString("Other_Ex", other);
                 editor.commit();
                 //Final string adding all parts.
-                String HistoryString =  " for $" + temp + " at " + DateATime;
+                String SelectedString = "0";
+                int selector = spinner.getSelectedItemPosition();
+                if (selector == 0){
+                    SelectedString = "Rent";
+                }
+                else if (selector == 1){
+                    SelectedString = "Services";
+                }
+                else if (selector == 2){
+                    SelectedString = "Food";
+                }
+                else if (selector == 3){
+                    SelectedString = "Entertainment";
+                }
+                else if (selector == 4){
+                    SelectedString = "Clothes";
+                }
+                else{
+                    SelectedString = "Other";
+                }
+                String HistoryString = SelectedString + " for $" + temp + " at " + DateATime;
                 History.add(HistoryString);
                 TextView txt = (TextView) findViewById(R.id.HView);
                 txt.setText(HistoryString);
