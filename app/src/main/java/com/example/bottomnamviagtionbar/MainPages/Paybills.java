@@ -29,7 +29,10 @@ import com.example.bottomnamviagtionbar.Interfaces.Bill;
 import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
 import com.example.bottomnamviagtionbar.Settings.settings;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,6 +85,8 @@ public class Paybills extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        History = getArrayList("History");
 
         preferences = getSharedPreferences("UserInfo", 0);
         final String Teemp = preferences.getString("Income", "");
@@ -199,6 +204,8 @@ public class Paybills extends AppCompatActivity {
                 }
                 String HistoryString = SelectedString + " for $" + temp + " at " + DateATime;
                 History.add(HistoryString);
+                //Put History into shared prefrences.
+                saveArrayList(History,"History");
                 TextView txt = (TextView) findViewById(R.id.HView);
                 txt.setText(HistoryString);
 
@@ -234,6 +241,8 @@ public class Paybills extends AppCompatActivity {
 
                 String HistoryString = "+$" + temp + " at " + DateATime + ".\n New Balance " + NewBudget;
                 History.add(HistoryString);
+                //Put History into shared pref.
+                saveArrayList(History,"History");
                 TextView txt = (TextView) findViewById(R.id.AddBalanceTextView);
                 txt.setText(HistoryString);
             }
@@ -301,11 +310,11 @@ public class Paybills extends AppCompatActivity {
                 //Date and Time format
                 String HistoryString = ExpenseType + " = Type " + temp + " = Amount " + ExpenseRecur + " = Recur";
                 History.add(HistoryString);
+                saveArrayList(History,"History");
                 TextView txt = (TextView) findViewById(R.id.TempView3);
                 txt.setText(HistoryString);
             }
         });
-
         ///////////////////////////////////////////////////////////////////////////
         BottomNavigationView navigation = findViewById(R.id.navigationView);
         Menu menu = navigation.getMenu();
@@ -381,5 +390,22 @@ public class Paybills extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void saveArrayList(List<String> list, String key){
+        SharedPreferences prefs = getSharedPreferences("UserInfo",0);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        editor.putString(key, json);
+        editor.apply();
+
+    }
+
+    public List<String> getArrayList(String key){
+        SharedPreferences prefs = getSharedPreferences("UserInfo",0);
+        Gson gson = new Gson();
+        String json = prefs.getString(key, null);
+        Type type = new TypeToken<List<String>>(){}.getType();
+        return gson.fromJson(json, type);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.bottomnamviagtionbar.MainPages;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -28,13 +29,17 @@ import com.example.bottomnamviagtionbar.Settings.settings;
 public class History extends AppCompatActivity {
 
     //private ActionBar toolbar;
-
+    SharedPreferences preferences;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        preferences = getSharedPreferences("UserInfo", 0);
+        String temp;
+        temp = preferences.getString("History","");
 
         //toolbar = getSupportActionBar();
 
