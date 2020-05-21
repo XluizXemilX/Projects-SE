@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Settings.ModifyIncome"></activity>
+        <activity android:name=".Settings.ModifyIncome" />
         <activity android:name=".RergistrationAndLogin.Login" />
         <activity android:name=".Settings.NotificationPage" />
         <activity android:name=".Settings.ProfileFolder.ChangePasswordProfile" />

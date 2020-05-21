@@ -1,85 +1,80 @@
 package com.example.bottomnamviagtionbar.RergistrationAndLogin;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
+import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
 import com.example.bottomnamviagtionbar.Interfaces.User;
 import com.example.bottomnamviagtionbar.MainPages.SetupBudget;
 import com.example.bottomnamviagtionbar.R;
 
+import java.util.regex.Pattern;
+
 public class Register extends AppCompatActivity{
 
-
-    EditText _etName, etUser, etPass;
+    EditText etName, etEmail, etPassword;
     Button bRegister;
-    SharedPreferences preferences;
+    SharedPrefsUtil sharedPrefsUtil;
+    User user;
+    HelperFunctions helperFunctions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        _etName =(EditText)findViewById(R.id.etName);
-        etUser =(EditText)findViewById(R.id.etUsername);
-        etPass =(EditText)findViewById((R.id.etPassLogin));
+        etName =(EditText)findViewById(R.id.etName);
+        etEmail =(EditText)findViewById(R.id.etUsername);
+        etPassword =(EditText)findViewById((R.id.etPassLogin));
         bRegister =(Button)findViewById(R.id.btnRegister);
-        preferences = getSharedPreferences("UserInfo",0);
+
+
+        user = new User();
+        sharedPrefsUtil = new SharedPrefsUtil(this);
+        helperFunctions = new HelperFunctions();
 
         bRegister.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String name = _etName.getText().toString();
-                String userVal = etUser.getText().toString();
-                String passVal = etPass.getText().toString();
-                String verification = preferences.getString("etUser","");
-                if(userVal.equals(verification)){
-                    Toast.makeText(Register.this, "An account with this email already exist!", Toast.LENGTH_SHORT).show();
-                }
-                else if((userVal.length()>1)&& passVal.length()>5) {
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("etName", name);
-                    editor.putString("etUser", userVal);
-                    editor.putString("etPass", passVal);
-                    editor.apply();
-                    Toast.makeText(Register.this, "User Registered", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Register.this, SetupBudget.class);
-                    startActivity(i);
-                }
-                else{
+                String email = etEmail.getText().toString();
+                if(!helperFunctions.ValidateFields(etName, etEmail, etPassword)){
                     Toast.makeText(Register.this, "One or more fields are empty. Please complete the form.",Toast.LENGTH_SHORT).show();
                 }
-
-
+                else if(ValidateEmail(email)){
+                    if(sharedPrefsUtil.contains(email)) {
+                        Toast.makeText(Register.this, "An account with this email already exist!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                       user.setEmail(email);
+                       user.setPassword(etPassword.getText().toString());
+                       user.setName(etName.getText().toString());
+                       user.setIncome(0);
+                       user.setBills(null);
+                       sharedPrefsUtil.put("email_income", email);
+                       sharedPrefsUtil.put(email,User.class,user);
+                       Toast.makeText(Register.this, "User Registered", Toast.LENGTH_SHORT).show();
+                       Intent intent = new Intent(Register.this, SetupBudget.class);
+                       startActivity(intent);
+                    }
+                }
+                else{
+                    Toast.makeText(Register.this, "Invalid email!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
     }
-
-    public void saveInfo(View view, User[] userList)
-    {
-        for (int i = 0; i < userList.length; i++) {
-            User user = userList[i];
-
-            // I am creating a new shared prefence for each user!
-            // by their username.
-            SharedPreferences sharedPref = getSharedPreferences("userInfo_" + user.email.trim(), Context.MODE_PRIVATE);
-
-            SharedPreferences.Editor editor = sharedPref.edit();
-
-            editor.putString("name", user.name);
-            editor.putString("email", user.email);
-            editor.putString("password", user.password);
-            editor.apply();
-        }
+    // validate email
+    private boolean ValidateEmail(String email){
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
     }
-
 }
 
 

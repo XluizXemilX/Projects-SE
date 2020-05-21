@@ -1,5 +1,7 @@
 package com.example.bottomnamviagtionbar.Helpers;
 
+import android.widget.EditText;
+
 import com.example.bottomnamviagtionbar.Interfaces.Bill;
 
 import java.lang.reflect.Array;
@@ -16,5 +18,21 @@ public class HelperFunctions {
             results[index] += bill.amount;
         }
         return results;
+    }
+
+    // validate edittext(check if edittexts are empty)
+    public boolean ValidateFields(EditText... editTexts){
+        for(EditText editText: editTexts){
+            if(editText != null
+                    && editText.getText() != null
+                    && editText.getText().toString().trim().length() == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean StringEquality(String a, String b){
+        return a.equals(b);
     }
 }

@@ -30,15 +30,14 @@ import android.widget.Toast;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
 import com.example.bottomnamviagtionbar.Helpers.Category;
-import com.example.bottomnamviagtionbar.Helpers.DecimalDigitsInputFilter;
 import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
 import com.example.bottomnamviagtionbar.Helpers.PieChartData;
+import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
 import com.example.bottomnamviagtionbar.Helpers.SpinnersHelper;
 import com.example.bottomnamviagtionbar.Interfaces.Bill;
+import com.example.bottomnamviagtionbar.Interfaces.User;
 import com.example.bottomnamviagtionbar.MainPages.AccountPage;
 import com.example.bottomnamviagtionbar.MainPages.History;
 import com.example.bottomnamviagtionbar.MainPages.MainActivity;
@@ -49,9 +48,10 @@ import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.Settings.settings;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.crypto.EncryptedPrivateKeyInfo;
 
 public class BudgetPage extends AppCompatActivity {
 
@@ -64,9 +64,10 @@ public class BudgetPage extends AppCompatActivity {
     }
 
 
+
     TextView  result;
     Toolbar topbar;
-    EditText Type, Amount,Type2, Amount2, MainBudget;
+    EditText  Amount, Amount2, MainBudget;
     Button add, calculate;
     LinearLayout dynamicLayout;
     Spinner Spinner1, Spinner2, IncomeSpin;
@@ -82,13 +83,6 @@ public class BudgetPage extends AppCompatActivity {
     AnyChartView pieChart;
     PieChartData data;
     Pie pie;
-
-
-    public float[] GetCatergoyValue()
-    {
-        return categoryValues;
-    }
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -133,7 +127,10 @@ public class BudgetPage extends AppCompatActivity {
         MainBudget.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(100,2)});
 
         preferences = getSharedPreferences("UserInfo",0);
-        MainBudget.setText(preferences.getString("Income", ""));
+        SharedPrefsUtil sharedPrefsUtil = new SharedPrefsUtil(this);
+        String email = sharedPrefsUtil.get("user_email", "");
+        User user = sharedPrefsUtil.get(email, User.class, new User());
+        MainBudget.setText(String.valueOf(user.getIncome()));
 
         editTexts.add(Amount);
         editTexts.add(Amount2);
@@ -444,6 +441,9 @@ public class BudgetPage extends AppCompatActivity {
                      @Override
                      public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                         ((TextView) view).setSingleLine(true);
+                         ((TextView) view).setEllipsize(TextUtils.TruncateAt.END);
+
                      }
 
                      @Override
@@ -494,7 +494,7 @@ public class BudgetPage extends AppCompatActivity {
     //creation methods
     public EditText createEditText(){
         EditText name = new EditText(BudgetPage.this);
-        name.setLayoutParams(new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1));
+        name.setLayoutParams(new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,.4f));
         return name;
     }
     public LinearLayout createLinearLayout(){
@@ -504,12 +504,12 @@ public class BudgetPage extends AppCompatActivity {
     }
     public Spinner createdSpinner(){
         Spinner spin = new  Spinner(BudgetPage.this);
-        spin.setLayoutParams(new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,1));
+        spin.setLayoutParams(new LinearLayout.LayoutParams(0,150,.55f));
         return spin;
     }
     public TextView createDeleteTv(){
         TextView delete = new TextView(BudgetPage.this);
-        delete.setLayoutParams(new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT, .25f));
+        delete.setLayoutParams(new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT, .1f));
         delete.setText("X");
         delete.setTextSize(24.0f);
         return delete;

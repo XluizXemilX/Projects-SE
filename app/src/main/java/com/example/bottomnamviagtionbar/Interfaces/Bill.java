@@ -7,5 +7,6 @@ public class Bill {
 
     public Category category;
     public float amount;
+    public String date;
 
 }

@@ -77,6 +77,6 @@ public class PieChartData {
                 pie.data(dataEntries);
 
             }
-        }, 1000);
+        }, 100);
     }
 }

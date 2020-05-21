@@ -7,11 +7,6 @@
     <string name="reg">Create an Account</string>
     <string name="name">Name</string>
     <string name="registerbbtn">Register</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="thish">home</string>
     <string name="forPass">Forgot Password?</string>
     <string name="recoveryEmail">Please enter the email account relate to this account.</string>
     <string name="send">send</string>
@@ -19,7 +14,6 @@
     <string name="resent">Resent</string>
     <string name="returnlogin">Return to Login</string>
     <string name="remember">Remember Me</string>
-    <string name="logout">Logout</string>
 
     <string-array name="spinner">
         <item>Monthly</item>
@@ -42,13 +36,12 @@
     <string name="newPassword">New Password</string>
     <string name="ConfirmNP">Confirm Password</string>
     <string name="Save">SAVE</string>
-    <string name="addbill">Add Bill +</string>
-    <string name="Amount">Amount</string>
     <string name="CalculateBtn">Calculate</string>
     <string name="passRequirements">* Password must contain a minimum of 6 characters!</string>
     <string name="value">$0.0</string>
-    <string name="rent">Rent</string>
     <string name="CurrentPassword">Current Password</string>
     <string name="money">$0.00</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

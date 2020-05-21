@@ -10,7 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.bottomnamviagtionbar.Helpers.GMailSender;
+import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
+import com.example.bottomnamviagtionbar.Interfaces.User;
 import com.example.bottomnamviagtionbar.R;
+
+import org.json.JSONObject;
 
 import java.util.Random;
 
@@ -20,6 +24,7 @@ public class RecoveryPass extends AppCompatActivity {
     Button Send;
     SharedPreferences preferences;
     String tempPass;
+    SharedPrefsUtil sharedPrefsUtil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +34,7 @@ public class RecoveryPass extends AppCompatActivity {
         Send = (Button)findViewById(R.id.send);
         preferences = getSharedPreferences("UserInfo",0);
         tempPass = getRandString();
+        sharedPrefsUtil = new SharedPrefsUtil(this);
 
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,15 +43,19 @@ public class RecoveryPass extends AppCompatActivity {
                 if(!EmailVal.isEmpty()) {
                     GMailSender sender = new GMailSender("luisemil12344@gmail.com", "pegasus123");
                     try {
-                        sender.sendMail("Recovery Password", "This is your temporary password " + tempPass + ". Please remember to change it after login into the app.", "luisemil12344@gmail.com", EmailVal);
+                        sender.sendMail("Recovery Password", "This is your temporary password " + tempPass +
+                                ". Please remember to change it after login into the app.",
+                                "luisemil12344@gmail.com", EmailVal);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("tempPass", tempPass);
-                    editor.putString("etPass", tempPass);
-                    editor.putString("recoverEmail", EmailVal);
-                    editor.apply();
+
+
+                    String email = sharedPrefsUtil.get("user_email", "");
+                    User user = sharedPrefsUtil.get(email, User.class, new User());
+                    user.setPassword(tempPass);
+                    sharedPrefsUtil.put(email, User.class, new User());
+                    sharedPrefsUtil.put("tempPassword", tempPass);
                     Intent i = new Intent(RecoveryPass.this, RecoveryMessage.class);
                     startActivity(i);
                 }else{
