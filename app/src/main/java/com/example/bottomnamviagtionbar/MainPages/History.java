@@ -1,6 +1,7 @@
 package com.example.bottomnamviagtionbar.MainPages;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -8,10 +9,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
@@ -22,13 +29,17 @@ import com.example.bottomnamviagtionbar.Settings.settings;
 public class History extends AppCompatActivity {
 
     //private ActionBar toolbar;
-
+    SharedPreferences preferences;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        preferences = getSharedPreferences("UserInfo", 0);
+        String temp;
+        temp = preferences.getString("History","");
 
         //toolbar = getSupportActionBar();
 
@@ -45,7 +56,20 @@ public class History extends AppCompatActivity {
             }
         });
         //////////////////////////////
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.searchbarlayout);
+        int historySize = Paybills.History.size();
+        for(int i = 0; i < historySize; i++){
+            TextView List = new TextView(this);
+            LayoutParams layoutParams = new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.gravity = Gravity.CENTER;
+            layoutParams.setMargins(10,10,10,10);
+            List.setLayoutParams(layoutParams);
+            List.setText(Paybills.History.get(i));
+            List.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            List.setBackgroundColor(0xffffdbdb);
+            linearLayout.addView(List);
 
+        }
         //////////////////////////////
 
         BottomNavigationView navigation = findViewById(R.id.navigationView);
