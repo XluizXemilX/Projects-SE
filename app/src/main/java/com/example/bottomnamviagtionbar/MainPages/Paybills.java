@@ -59,19 +59,12 @@ public class Paybills extends AppCompatActivity {
     ArrayList<Spinner> spinners = new ArrayList<>();
     ArrayList<EditText> editTexts = new ArrayList<>();
 
-    public float[] GetCatergoyValue()
-    {
-        return categoryValues;
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paybills);
-
-        //toolbar = getSupportActionBar();
 
         Toolbar topbar = findViewById(R.id.topbar);
         topbar.setTitle("Bill");
@@ -118,10 +111,12 @@ public class Paybills extends AppCompatActivity {
         spinner.setAdapter(arrayAdapterCategories);
         spinners.add(spinner);
         editTexts.add(amount);
+
         Addbill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 bills.clear();
+
                 //Converting input to string getting ready for format.
                 //Format: ("Type of expense"  "Amount"  "Date & Time")
                 //Amount to string
@@ -129,13 +124,13 @@ public class Paybills extends AppCompatActivity {
                 if (temp.length() == 0){
                     temp = "0.00";
                 }
+
                 //Date and time into string
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 Date date = new Date();
                 String DateATime = formatter.format(date);
+
                 //Expense Type to string
-
-
                 float sum =0;
                 bills.clear();
 
@@ -157,16 +152,9 @@ public class Paybills extends AppCompatActivity {
                     }
                 }
 
-
-
-
-
-
-
                 SharedPreferences.Editor editor = preferences.edit();
                 HelperFunctions helper = new HelperFunctions();
                 categoryValues = helper.AddCategories(bills);
-
 
                 String rent = String.valueOf(categoryValues[0]);
                 editor.putString("Rent_Ex", rent);
@@ -208,9 +196,6 @@ public class Paybills extends AppCompatActivity {
                 saveArrayList(History,"History");
                 TextView txt = (TextView) findViewById(R.id.HView);
                 txt.setText(HistoryString);
-
-
-
             }
         });
 

@@ -51,8 +51,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.crypto.EncryptedPrivateKeyInfo;
-
 public class BudgetPage extends AppCompatActivity {
 
     public enum Frequency {
@@ -62,8 +60,6 @@ public class BudgetPage extends AppCompatActivity {
         Bi_Monthly,
         Bi_Weekly
     }
-
-
 
     TextView  result;
     Toolbar topbar;
@@ -94,8 +90,6 @@ public class BudgetPage extends AppCompatActivity {
         pie = AnyChart.pie();
         pieChart.setChart(pie);
         data = new PieChartData();
-        //setPieChart();
-
 
         topbar = findViewById(R.id.topbar);
         topbar.setTitle("Budget");
@@ -137,7 +131,6 @@ public class BudgetPage extends AppCompatActivity {
 
         final SharedPreferences.Editor editor = preferences.edit();
 
-
         //Budget spin adapter
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 BudgetPage.this,
@@ -161,8 +154,6 @@ public class BudgetPage extends AppCompatActivity {
         Spinner2.setAdapter(arrayAdapterCategories);
         spinners.add(Spinner2);
 
-
-
         IncomeSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -180,7 +171,6 @@ public class BudgetPage extends AppCompatActivity {
 
                             float amount =  Float.valueOf(etString);
                             amount = spinnersHelper.ConvertBudgetWeekly(i, amount);
-
                             et.setText(String.format("%.2f",amount));
                         }
 
@@ -189,8 +179,6 @@ public class BudgetPage extends AppCompatActivity {
                             value = spinnersHelper.ConvertBudgetWeekly(i, value);
                             MainBudget.setText(String.format("%.2f",value));
                         }
-
-
                         break;
 
                     case Monthly:
@@ -242,7 +230,6 @@ public class BudgetPage extends AppCompatActivity {
 
                             float amount =  Float.valueOf(etString);
                             amount = spinnersHelper.ConvertBudgetBiWeekly(i, amount);
-
                             et.setText(String.format("%.2f",amount));
                         }
 
@@ -251,7 +238,6 @@ public class BudgetPage extends AppCompatActivity {
                             value = spinnersHelper.ConvertBudgetBiWeekly(i, value);
                             MainBudget.setText(String.format("%.2f",value));
                         }
-
                         break;
 
                     case Bi_Monthly:
@@ -273,7 +259,6 @@ public class BudgetPage extends AppCompatActivity {
                         }
                         break;
                     default:
-
                         break;
                 }
                 current_frequency = Frequency.values()[i];
@@ -284,10 +269,6 @@ public class BudgetPage extends AppCompatActivity {
 
             }
         });
-
-
-
-
 
         calculate.setOnClickListener( new View.OnClickListener(){
             @Override
@@ -310,14 +291,11 @@ public class BudgetPage extends AppCompatActivity {
                         _bill.amount = amount;
                         _bill.category = catergories;
                         bills.add(_bill);
-
                     }
-
                 }
 
                 HelperFunctions helper = new HelperFunctions();
                 categoryValues = helper.AddCategories(bills);
-
 
                 String rent = String.valueOf(categoryValues[0]);
                 editor.putString("Rent_Ex", rent);
@@ -342,16 +320,9 @@ public class BudgetPage extends AppCompatActivity {
                 }
                 editor.commit();
 
-                //
-
-
-
-
                 TextView result = findViewById(R.id.tvResult);
                 TextView TotalBud =findViewById(R.id.totaltv);
                 TextView Projected =findViewById(R.id.ProjectedSaving);
-
-
 
                 if(budget.isEmpty()){
                     Toast.makeText(BudgetPage.this, "Enter a budget amount.",Toast.LENGTH_SHORT).show();
@@ -374,16 +345,10 @@ public class BudgetPage extends AppCompatActivity {
                 }
 
                 //chart
-
                 data.setPieChart(preferences,pie);
-
-
             }
 
         });
-
-
-
 
         BottomNavigationView navigation = findViewById(R.id.navigationView);
         Menu menu = navigation.getMenu();
@@ -423,8 +388,6 @@ public class BudgetPage extends AppCompatActivity {
             }
         });
 
-         //
-
          add.setOnClickListener(new View.OnClickListener() {
              @RequiresApi(api = Build.VERSION_CODES.O)
              @Override
@@ -452,12 +415,10 @@ public class BudgetPage extends AppCompatActivity {
                      }
                  });
 
-
                  //bill amount edittext creation
                  final EditText value = createEditText();
                  value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                  value.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(100,2)});
-
 
                  //create the delete textview
                  TextView delete = createDeleteTv();
@@ -466,15 +427,12 @@ public class BudgetPage extends AppCompatActivity {
                  layout.addView(category);
                  layout.addView(value);
 
-
                  layout.addView(delete);
                  dynamicLayout.addView(layout);
                  editTexts.add(value);
 
-
                  //Types.add(name);
                  spinners.add(category);
-
 
                  delete.setOnClickListener(new View.OnClickListener() {
                      @Override
@@ -482,14 +440,11 @@ public class BudgetPage extends AppCompatActivity {
                          dynamicLayout.removeView(layout);
                          editTexts.remove(value);
                          spinners.remove(category);
-
-
                      }
                  });
              }
          });
     }
-
 
     //creation methods
     public EditText createEditText(){
@@ -497,16 +452,19 @@ public class BudgetPage extends AppCompatActivity {
         name.setLayoutParams(new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT,.4f));
         return name;
     }
+
     public LinearLayout createLinearLayout(){
         LinearLayout layout = new LinearLayout(BudgetPage.this);
         layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         return layout;
     }
+
     public Spinner createdSpinner(){
         Spinner spin = new  Spinner(BudgetPage.this);
         spin.setLayoutParams(new LinearLayout.LayoutParams(0,150,.55f));
         return spin;
     }
+
     public TextView createDeleteTv(){
         TextView delete = new TextView(BudgetPage.this);
         delete.setLayoutParams(new LinearLayout.LayoutParams(0,ViewGroup.LayoutParams.WRAP_CONTENT, .1f));
@@ -521,9 +479,8 @@ public class BudgetPage extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top, menu);
         return true;
-
-
     }
+
     //topbar menu selection
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -539,9 +496,9 @@ public class BudgetPage extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     //sets input to 2 decimals places
     public class DecimalDigitsInputFilter implements InputFilter {
-
         Pattern mPattern;
 
         public DecimalDigitsInputFilter(int digitsBeforeZero,int digitsAfterZero) {
@@ -556,60 +513,5 @@ public class BudgetPage extends AppCompatActivity {
                 return "";
             return null;
         }
-
     }
-
-    //public void setPieChart(float sum) {
-    //    Pie pie = AnyChart.pie();
-    //    List<DataEntry> dataEntries= new ArrayList<>();
-//
-//
-    //    //Paid Bill
-    //    // String paid = preference.getString("Paid", "");
-    //    // if(!paid.isEmpty()){
-    //    //     Float paidB = Float.valueOf(paid);
-    //    //     dataEntries.add(new ValueDataEntry("Bill",paidB));
-    //    // }
-    //    //Rent
-//
-    //    Float rent = categoryValues[0];
-    //    if(rent !=0){
-    //        dataEntries.add(new ValueDataEntry("Rent", rent));
-    //    }
-    //    Float services = categoryValues[1];
-    //    if(services !=0){
-    //        dataEntries.add(new ValueDataEntry("Services", services));
-    //    }
-    //    Float food = categoryValues[2];
-    //    if(food !=0){
-    //        dataEntries.add(new ValueDataEntry("Food", food));
-    //    }
-    //    Float entertainment = categoryValues[3];
-    //    if(entertainment !=0){
-    //        dataEntries.add(new ValueDataEntry("Entertainment", entertainment));
-    //    }
-    //    Float clothes = categoryValues[4];
-    //    if(clothes !=0){
-    //        dataEntries.add(new ValueDataEntry("Clothes", clothes));
-    //    }
-    //    Float others = categoryValues[5];
-    //    if(others !=0){
-    //        dataEntries.add(new ValueDataEntry("Other", others));
-    //    }
-//
-    //    String budget = MainBudget.getText().toString();
-    //    String savings = String.valueOf(Float.valueOf(budget) - sum);
-//
-    //    ////left for speding or savings
-//
-    //    if(!savings.isEmpty()) {
-    //        Float saving = Float.valueOf(savings);
-    //        dataEntries.add(new ValueDataEntry("Savings", saving));
-//
-    //    }
-//
-    //    pie.data(dataEntries);
-    //    pieChart.setChart(pie);
-    //}
-
 }

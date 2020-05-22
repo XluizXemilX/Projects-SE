@@ -61,7 +61,6 @@ public class AccountPage extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int i) {
-
                 createDots(i);
             }
 
@@ -98,9 +97,6 @@ public class AccountPage extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
-
 
         Toolbar topbar = findViewById(R.id.topbar);
         topbar.setTitle("Accounts");
@@ -155,14 +151,14 @@ public class AccountPage extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top, menu);
         return true;
-
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

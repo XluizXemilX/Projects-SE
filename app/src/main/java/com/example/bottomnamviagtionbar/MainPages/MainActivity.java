@@ -73,26 +73,20 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-
-
                         break;
                     case R.id.account:
-
                         Intent a = new Intent(MainActivity.this, AccountPage.class);
                         startActivity(a);
                         break;
                     case R.id.budget:
-
                         Intent b = new Intent(MainActivity.this, BudgetPage.class);
                         startActivity(b);
                         break;
                     case R.id.history:
-
                         Intent c = new Intent(MainActivity.this, History.class);
                         startActivity(c);
                         break;
                     case R.id.paybills:
-
                         Intent d = new Intent(MainActivity.this, Paybills.class);
                         startActivity(d);
                         break;
@@ -100,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     @Override
@@ -124,6 +117,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
