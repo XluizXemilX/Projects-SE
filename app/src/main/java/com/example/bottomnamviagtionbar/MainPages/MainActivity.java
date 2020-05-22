@@ -26,9 +26,12 @@ import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.Settings.settings;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     CalendarView calendar;
+    Calendar cal;
     SharedPreferences preference;
     AnyChartView pieChart;
     Pie pie;
@@ -38,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        
         preference = getSharedPreferences("UserInfo", 0);
 
         //chart

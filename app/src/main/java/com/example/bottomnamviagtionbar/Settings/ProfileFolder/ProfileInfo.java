@@ -40,6 +40,9 @@ public class ProfileInfo extends AppCompatActivity {
         sharedPrefsUtil = new SharedPrefsUtil(this);
         helperFunctions = new HelperFunctions();
         final String email = sharedPrefsUtil.get("user_email", "");
+        final User user = sharedPrefsUtil.get(email,User.class, new User());
+        name.setText(user.getName());
+        etEmail.setText(user.getEmail());
 
         changePass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +72,7 @@ public class ProfileInfo extends AppCompatActivity {
                     Toast.makeText(ProfileInfo.this,"Make sure that all fields are completed",Toast.LENGTH_SHORT).show();
                 }
                 else if(ValidateEmail(emailVal)){
-                    User user = sharedPrefsUtil.get(email,User.class, new User());
+
                     user.setName(nameval);
                     user.setEmail(emailVal);
                     sharedPrefsUtil.put(emailVal,User.class, user);
