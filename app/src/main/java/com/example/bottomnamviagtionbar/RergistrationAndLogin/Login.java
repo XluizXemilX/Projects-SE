@@ -65,6 +65,10 @@ public class Login extends AppCompatActivity{
                            sharedPrefsUtil.put("user_password",
                                    remember.isChecked() ? password : "");
 
+                            // Everything in the app uses "email_income", it has to be set on login
+                            // or else the app will only remember the last registered user
+                            sharedPrefsUtil.put("email_income", email);
+
                            Intent intent = new Intent(Login.this, MainActivity.class);
                            startActivity(intent);
                        }

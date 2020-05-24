@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class User {
@@ -15,13 +16,15 @@ public class User {
    private String email;
    private float income;
    private ArrayList<Bill> bills;
+   private List<String> histories;
 
    public User(){
       name = null;
       password =null;
       email =null;
-      income = 0;
+      income = 0.0f;
       bills = null;
+      histories = null;
    }
 
    public User(String _name, String _password, String _email){
@@ -30,6 +33,7 @@ public class User {
       email = _email;
       income = 0;
       bills = null;
+      histories = null;
    }
 
    public String getEmail() {
@@ -52,8 +56,36 @@ public class User {
       return bills;
    }
 
+   public List<String> getHistories() {
+      return histories;
+   }
+
    public void setBills(ArrayList<Bill> bills) {
       this.bills = bills;
+   }
+
+   public void addBill(Bill bill) {
+      this.bills.add(bill);
+   }
+
+    public void removeBill(Bill bill) {
+      this.bills.remove(bill);
+   }
+
+   public void setHistories(List<String> histories) {
+      this.histories = histories;
+   }
+
+   public void addHistory(String history) {
+      this.histories.add(history);
+   }
+
+   public void addHistory(int index, String history) {
+      this.histories.add(index, history);
+   }
+
+   public void removeHistory(String history) {
+      this.histories.remove(history);
    }
 
    public void setEmail(String email) {

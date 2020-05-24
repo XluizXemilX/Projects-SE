@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class HelperFunctions {
 
-    public float[] AddCategories(ArrayList<Bill> bills){
+    public float[] mapBillCategories(ArrayList<Bill> bills){
         final int count = Category.values().length;
         float[] results = new float[count];
 

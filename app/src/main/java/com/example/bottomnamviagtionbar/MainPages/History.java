@@ -20,26 +20,30 @@ import android.widget.LinearLayout.LayoutParams;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
+import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
+import com.example.bottomnamviagtionbar.Interfaces.User;
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
 import com.example.bottomnamviagtionbar.Settings.settings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class History extends AppCompatActivity {
 
     //private ActionBar toolbar;
-    SharedPreferences preferences;
+    SharedPrefsUtil sharedPrefsUtil;
+    HelperFunctions helperFunc;
+    User user;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-
-        preferences = getSharedPreferences("UserInfo", 0);
-        String temp;
-        temp = preferences.getString("History","");
 
         //toolbar = getSupportActionBar();
 
@@ -56,15 +60,26 @@ public class History extends AppCompatActivity {
             }
         });
         //////////////////////////////
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.searchbarlayout);
-        int historySize = Paybills.History.size();
-        for(int i = 0; i < historySize; i++){
+        helperFunc = new HelperFunctions();
+        sharedPrefsUtil = new SharedPrefsUtil(this);
+        String email = sharedPrefsUtil.get("email_income", "");
+        user = sharedPrefsUtil.get(email, User.class, new User());
+
+
+        if(user.getHistories() == null)
+        {
+            user.setHistories(new ArrayList<String>());
+        }
+
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.History);
+
+        for(String history : user.getHistories()){
             TextView List = new TextView(this);
             LayoutParams layoutParams = new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             layoutParams.gravity = Gravity.CENTER;
             layoutParams.setMargins(10,10,10,10);
             List.setLayoutParams(layoutParams);
-            List.setText(Paybills.History.get(i));
+            List.setText(history);
             List.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             List.setBackgroundColor(0xffffdbdb);
             linearLayout.addView(List);

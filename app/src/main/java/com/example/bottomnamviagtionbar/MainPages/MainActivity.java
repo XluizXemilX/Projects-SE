@@ -19,7 +19,13 @@ import android.widget.CalendarView;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.charts.Pie;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
 import com.example.bottomnamviagtionbar.Helpers.PieChartData;
+import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
+import com.example.bottomnamviagtionbar.Interfaces.Bill;
+import com.example.bottomnamviagtionbar.Interfaces.User;
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
@@ -27,12 +33,16 @@ import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.Settings.settings;
 
 import java.util.Calendar;
+import java.util.ArrayList;
+import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity {
 
     CalendarView calendar;
     Calendar cal;
-    SharedPreferences preference;
+    SharedPrefsUtil sharedPrefsUtil;
+    HelperFunctions helperFunc;
+    User user;
     AnyChartView pieChart;
     Pie pie;
 
@@ -42,14 +52,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        preference = getSharedPreferences("UserInfo", 0);
+        helperFunc = new HelperFunctions();
+        sharedPrefsUtil = new SharedPrefsUtil(this);
+        String email = sharedPrefsUtil.get("email_income", "");
+        user = sharedPrefsUtil.get(email, User.class, new User());
 
         //chart
         pieChart = findViewById(R.id.any_chart_view);
         pie = AnyChart.pie();
         pieChart.setChart(pie);
-        PieChartData chart = new PieChartData();
-        chart.setPieChart(preference, pie);
+        final ArrayList<DataEntry> dataEntries = new ArrayList<>();
+
+        ArrayList<Bill> bills = user.getBills();
+        if(bills != null)
+        {
+            float[] billCategoryMap = helperFunc.mapBillCategories(bills);
+            String []categoryString = {"Rent", "Services", "Food", "Entertainment", "Clothes", "Other"};
+            float billTotal = 0;
+            for(int i = 0; i < billCategoryMap.length; ++i ){
+                billTotal += billCategoryMap[i];
+                dataEntries.add(new ValueDataEntry(categoryString[i], billCategoryMap[i]));
+            }
+            dataEntries.add(new ValueDataEntry("Savings", user.getIncome() - billTotal));
+        }
+
+        pie.data(dataEntries);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pie.data(dataEntries);
+
+            }
+        }, 100);
 
         Toolbar topbar = findViewById(R.id.topbar);
         topbar.setTitle("Home");

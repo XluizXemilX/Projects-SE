@@ -22,7 +22,6 @@ public class RecoveryPass extends AppCompatActivity {
 
     EditText etUser;
     Button Send;
-    SharedPreferences preferences;
     String tempPass;
     SharedPrefsUtil sharedPrefsUtil;
     @Override
@@ -32,7 +31,6 @@ public class RecoveryPass extends AppCompatActivity {
 
         etUser =(EditText)findViewById(R.id.etRecoveyP);
         Send = (Button)findViewById(R.id.send);
-        preferences = getSharedPreferences("UserInfo",0);
         tempPass = getRandString();
         sharedPrefsUtil = new SharedPrefsUtil(this);
 
@@ -49,7 +47,6 @@ public class RecoveryPass extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
 
                     String email = sharedPrefsUtil.get("user_email", "");
                     User user = sharedPrefsUtil.get(email, User.class, new User());

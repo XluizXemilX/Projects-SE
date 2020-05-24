@@ -32,6 +32,7 @@ import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.charts.Pie;
 import com.example.bottomnamviagtionbar.Helpers.Category;
+import com.example.bottomnamviagtionbar.Helpers.Frequency;
 import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
 import com.example.bottomnamviagtionbar.Helpers.PieChartData;
 import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
@@ -52,15 +53,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BudgetPage extends AppCompatActivity {
-
-    public enum Frequency {
-        Monthly, // 0
-        Weekly,
-        Yearly,
-        Bi_Monthly,
-        Bi_Weekly
-    }
-
     TextView  result;
     Toolbar topbar;
     EditText  Amount, Amount2, MainBudget;
@@ -295,7 +287,7 @@ public class BudgetPage extends AppCompatActivity {
                 }
 
                 HelperFunctions helper = new HelperFunctions();
-                categoryValues = helper.AddCategories(bills);
+                categoryValues = helper.mapBillCategories(bills);
 
                 String rent = String.valueOf(categoryValues[0]);
                 editor.putString("Rent_Ex", rent);
