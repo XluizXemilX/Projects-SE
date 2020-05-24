@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
@@ -30,6 +31,8 @@ import android.widget.Toast;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
 import com.example.bottomnamviagtionbar.Helpers.Category;
 import com.example.bottomnamviagtionbar.Helpers.Frequency;
@@ -49,6 +52,7 @@ import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.Settings.settings;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,7 +67,6 @@ public class BudgetPage extends AppCompatActivity {
 
     ArrayList<Spinner> spinners = new ArrayList<>();
     ArrayList<Bill> bills = new ArrayList<>();
-    SharedPreferences preferences;
     Frequency current_frequency;
     SpinnersHelper spinnersHelper;
     float[] categoryValues;
@@ -112,7 +115,6 @@ public class BudgetPage extends AppCompatActivity {
         MainBudget =findViewById(R.id.editText2);
         MainBudget.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(100,2)});
 
-        preferences = getSharedPreferences("UserInfo",0);
         SharedPrefsUtil sharedPrefsUtil = new SharedPrefsUtil(this);
         String email = sharedPrefsUtil.get("user_email", "");
         User user = sharedPrefsUtil.get(email, User.class, new User());
@@ -120,8 +122,6 @@ public class BudgetPage extends AppCompatActivity {
 
         editTexts.add(Amount);
         editTexts.add(Amount2);
-
-        final SharedPreferences.Editor editor = preferences.edit();
 
         //Budget spin adapter
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
@@ -289,28 +289,13 @@ public class BudgetPage extends AppCompatActivity {
                 HelperFunctions helper = new HelperFunctions();
                 categoryValues = helper.mapBillCategories(bills);
 
-                String rent = String.valueOf(categoryValues[0]);
-                editor.putString("Rent_Ex", rent);
-                String services = String.valueOf(categoryValues[1]);
-                editor.putString("Services_Ex", services);
-                String food = String.valueOf(categoryValues[2]);
-                editor.putString("Food_Ex", food);
-                String entertain = String.valueOf(categoryValues[3]);
-                editor.putString("Entertainment_Ex", entertain);
-                String clothes = String.valueOf(categoryValues[4]);
-                editor.putString("Clothes_Ex", clothes);
-                String other = String.valueOf(categoryValues[5]);
-                editor.putString("Other_Ex", other);
                 String total = "You have $";
                 String budget = MainBudget.getText().toString();
+                String savings = null;
                 if(!TextUtils.isEmpty(budget)){
-                    String savings = String.valueOf(Float.valueOf(budget) - sum);
-                    editor.putString("Saving", savings);
+                    savings = String.valueOf(Float.valueOf(budget) - sum);
 
-                    String paid = String.valueOf(sum);
-                    editor.putString("Paid", paid);
                 }
-                editor.commit();
 
                 TextView result = findViewById(R.id.tvResult);
                 TextView TotalBud =findViewById(R.id.totaltv);
@@ -337,7 +322,7 @@ public class BudgetPage extends AppCompatActivity {
                 }
 
                 //chart
-                data.setPieChart(preferences,pie);
+                setPieChart(pie, categoryValues, Float.valueOf(savings));
             }
 
         });
@@ -436,6 +421,38 @@ public class BudgetPage extends AppCompatActivity {
                  });
              }
          });
+    }
+
+    public void setPieChart(final Pie pie, float[] categoryValues, float savings){
+        final List<DataEntry> dataEntries = new ArrayList<>();
+
+        float rent = categoryValues[0];
+        dataEntries.add(new ValueDataEntry("Rent", rent));
+
+        float food = categoryValues[1];
+        dataEntries.add(new ValueDataEntry("Food", food));
+
+        float services = categoryValues[2];
+        dataEntries.add(new ValueDataEntry("Services", services));
+
+        float entertainment = categoryValues[3];
+        dataEntries.add(new ValueDataEntry("Entertainment", entertainment));
+
+        float clothes = categoryValues[4];
+        dataEntries.add(new ValueDataEntry("Clothes", clothes));
+
+        float others = categoryValues[5];
+        dataEntries.add(new ValueDataEntry("Other", others));
+
+        dataEntries.add(new ValueDataEntry("Savings", savings));
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pie.data(dataEntries);
+
+            }
+        }, 100);
     }
 
     //creation methods
