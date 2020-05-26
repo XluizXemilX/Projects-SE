@@ -30,10 +30,14 @@ import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
 import com.example.bottomnamviagtionbar.R;
 import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
+import com.example.bottomnamviagtionbar.Interfaces.User;
 import com.example.bottomnamviagtionbar.Settings.settings;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
+import java.util.Date;
+
 import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     User user;
     AnyChartView pieChart;
     Pie pie;
+    String Month;
+    float budget;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -62,6 +68,21 @@ public class MainActivity extends AppCompatActivity {
         pie = AnyChart.pie();
         pieChart.setChart(pie);
         final ArrayList<DataEntry> dataEntries = new ArrayList<>();
+
+        /////
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM");
+        String DateATime = formatter.format(date);
+
+
+        String CurrentMonth = user.getCurrentMonth();
+        if (!CurrentMonth.equals(DateATime)){
+            user.setIncome(user.getOriginalIncome());
+            user.setCurrentMonth(DateATime);
+            user.setBillsAmount(0);
+            sharedPrefsUtil.put(email, User.class, user);
+        }
+        ////
 
         ArrayList<Bill> bills = user.getBills();
         if(bills != null)

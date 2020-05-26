@@ -140,7 +140,8 @@ public class Paybills extends AppCompatActivity {
                 user.addBill(bill);
 
                 // TODO: Figure out a better way for savings
-                float savings = user.getIncome() - bill.amount;
+                user.addBllsAmount(bill.amount);
+                float savings = user.getIncome() - user.getBillsAmount();
 
                 //History String
                 String historyString = String.format(
@@ -244,6 +245,7 @@ public class Paybills extends AppCompatActivity {
 
                 //Put History into shared pref.
                 user.addHistory(0, historyString);
+                user.addBllsAmount(Float.parseFloat(etAddrecurring.getText().toString()));
                 sharedPrefsUtil.put(email, User.class, user);
                 TextView txt = (TextView) findViewById(R.id.TempView3);
                 txt.setText(historyString);

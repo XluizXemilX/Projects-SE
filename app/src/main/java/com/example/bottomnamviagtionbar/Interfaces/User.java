@@ -17,6 +17,9 @@ public class User {
    private float income;
    private ArrayList<Bill> bills;
    private List<String> histories;
+   private float originalIncome;
+   private String currentMonth;
+   private float billsAmount;
 
    public User(){
       name = null;
@@ -25,6 +28,9 @@ public class User {
       income = 0.0f;
       bills = null;
       histories = null;
+      originalIncome = 0.0f;
+      currentMonth = null;
+      billsAmount = 0.0f;
    }
 
    public User(String _name, String _password, String _email){
@@ -34,6 +40,9 @@ public class User {
       income = 0;
       bills = null;
       histories = null;
+      originalIncome = 0;
+      currentMonth = null;
+      billsAmount = 0;
    }
 
    public String getEmail() {
@@ -58,6 +67,18 @@ public class User {
 
    public List<String> getHistories() {
       return histories;
+   }
+
+   public float getOriginalIncome() {
+      return originalIncome;
+   }
+
+   public String getCurrentMonth() {
+      return currentMonth;
+   }
+
+   public float getBillsAmount() {
+      return billsAmount;
    }
 
    public void setBills(ArrayList<Bill> bills) {
@@ -102,6 +123,22 @@ public class User {
 
    public void setPassword(String password) {
       this.password = password;
+   }
+
+   public void setOriginalIncome(float originalIncome){
+      this.originalIncome = originalIncome;
+   }
+
+   public void setCurrentMonth(String currentMonth) {
+      this.currentMonth = currentMonth;
+   }
+
+   public void setBillsAmount(float billsAmount) {
+      this.billsAmount = billsAmount;
+   }
+
+   public void addBllsAmount(float billsAmount) {
+      this.billsAmount += billsAmount;
    }
 
 }

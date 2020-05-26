@@ -74,8 +74,8 @@ public class AccountPage extends AppCompatActivity {
         String email = sharedPrefsUtil.get("user_email", "");
         User user = sharedPrefsUtil.get(email, User.class, new User());
         String incomeVal= String.valueOf(user.getIncome());
-        String billVal = String.valueOf(100);
-        String savingsVal = String.valueOf(user.getIncome() - 100);
+        String billVal = String.valueOf(user.getBillsAmount());
+        String savingsVal = String.valueOf(user.getIncome() - user.getBillsAmount());
         BillValue = findViewById(R.id.amount_Bills);
         BillValue.setText("$" + billVal);
         SavingsValue = findViewById(R.id.amount_Savings);

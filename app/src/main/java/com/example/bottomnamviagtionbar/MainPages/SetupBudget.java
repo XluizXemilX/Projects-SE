@@ -15,6 +15,9 @@ import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
 import com.example.bottomnamviagtionbar.Interfaces.User;
 import com.example.bottomnamviagtionbar.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class SetupBudget extends AppCompatActivity {
     SharedPrefsUtil sharedPrefsUtil;
@@ -48,6 +51,11 @@ public class SetupBudget extends AppCompatActivity {
                     String email = sharedPrefsUtil.get("email_income", "");
                     User user = sharedPrefsUtil.get(email, User.class, new User());
                     user.setIncome(income);
+                    user.setOriginalIncome(income);
+                    Date date = new Date();
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM");
+                    String DateATime = formatter.format(date);
+                    user.setCurrentMonth(DateATime);
                     sharedPrefsUtil.put(email, User.class, user);
                     Intent intent = new Intent(SetupBudget.this, MainActivity.class);
                     startActivity(intent);
