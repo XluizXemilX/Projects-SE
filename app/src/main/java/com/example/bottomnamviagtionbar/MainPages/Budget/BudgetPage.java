@@ -294,7 +294,6 @@ public class BudgetPage extends AppCompatActivity {
                 String savings = null;
                 if(!TextUtils.isEmpty(budget)){
                     savings = String.valueOf(Float.valueOf(budget) - sum);
-
                 }
 
                 TextView result = findViewById(R.id.tvResult);
@@ -336,14 +335,11 @@ public class BudgetPage extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-
-
                         Intent i = new Intent(BudgetPage.this, MainActivity.class);
                         startActivity(i);
                         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.account:
-
                         Intent a = new Intent(BudgetPage.this, AccountPage.class);
                         startActivity(a);
                         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
@@ -351,12 +347,10 @@ public class BudgetPage extends AppCompatActivity {
                     case R.id.budget:
                         break;
                     case R.id.history:
-                        //topbar.setTitle("History");
                         Intent c = new Intent(BudgetPage.this, History.class);
                         startActivity(c);
                         break;
                     case R.id.paybills:
-                        //topbar.setTitle("PayBills");
                         Intent d = new Intent(BudgetPage.this, Paybills.class);
                         startActivity(d);
                         break;
@@ -380,10 +374,8 @@ public class BudgetPage extends AppCompatActivity {
                  category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                      @Override
                      public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                          ((TextView) view).setSingleLine(true);
                          ((TextView) view).setEllipsize(TextUtils.TruncateAt.END);
-
                      }
 
                      @Override
@@ -516,7 +508,6 @@ public class BudgetPage extends AppCompatActivity {
 
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-
             Matcher matcher=mPattern.matcher(dest);
             if(!matcher.matches())
                 return "";

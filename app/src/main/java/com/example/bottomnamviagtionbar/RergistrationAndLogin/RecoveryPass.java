@@ -39,7 +39,7 @@ public class RecoveryPass extends AppCompatActivity {
             public void onClick(View view) {
                 String EmailVal = etUser.getText().toString();
                 if(!EmailVal.isEmpty()) {
-                    GMailSender sender = new GMailSender("luisemil12344@gmail.com", "pegasus123");
+                    GMailSender sender = new GMailSender("savemoneyapp79@gmail.com", "pegasus2001");
                     try {
                         sender.sendMail("Recovery Password", "This is your temporary password " + tempPass +
                                 ". Please remember to change it after login into the app.",

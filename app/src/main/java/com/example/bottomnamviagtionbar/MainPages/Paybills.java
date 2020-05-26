@@ -157,30 +157,9 @@ public class Paybills extends AppCompatActivity {
                 sharedPrefsUtil.put(email, User.class, user);
                 TextView txt = (TextView) findViewById(R.id.HView);
                 txt.setText(historyString);
-
-
-                //SharedPreferences.Editor editor = preferences.edit();
-               //HelperFunctions helper = new HelperFunctions();
-               //float[] categoryValues = helper.AddCategories(bills);
-
-               //String rent = String.valueOf(categoryValues[0]);
-               //editor.putString("Rent_Ex", rent);
-               //String services = String.valueOf(categoryValues[1]);
-               //editor.putString("Services_Ex", services);
-               //String food = String.valueOf(categoryValues[2]);
-               //editor.putString("Food_Ex", food);
-               //String entertain = String.valueOf(categoryValues[3]);
-               //editor.putString("Entertainment_Ex", entertain);
-               //String clothes = String.valueOf(categoryValues[4]);
-               //editor.putString("Clothes_Ex", clothes);
-               //String other = String.valueOf(categoryValues[5]);
-               //editor.putString("Other_Ex", other);
-               //editor.commit();
-                //Final string adding all parts.
             }
         });
 
-        ///////////////////////////////////////////////////////////////////////////
         etAddbalance = findViewById(R.id.AddBalanceAmount);
         etAddbalance.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(100,2)});
         btnAddBalance = findViewById(R.id.AddBalanceButton);
@@ -210,7 +189,6 @@ public class Paybills extends AppCompatActivity {
             }
         });
 
-        ///////////////////////////////////////////////////////////////////////////
         frequencySpinner = findViewById(R.id.spinner3);
         categorySpinnerRecurring = findViewById(R.id.spinner4);
         final ArrayAdapter<String> ArrayAdapterCategories = new ArrayAdapter<>(
@@ -249,7 +227,7 @@ public class Paybills extends AppCompatActivity {
                 txt.setText(historyString);
             }
         });
-        ///////////////////////////////////////////////////////////////////////////
+
         BottomNavigationView navigation = findViewById(R.id.navigationView);
         Menu menu = navigation.getMenu();
         MenuItem menuItem = menu.getItem(4);
@@ -259,58 +237,40 @@ public class Paybills extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        //toolbar.setTitle("Home");
-                        //loadFragment(new HomeFragment());
-                        //return true;
                         Intent i = new Intent(Paybills.this, MainActivity.class);
                         startActivity(i);
                         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.account:
-                        //toolbar.setTitle("AccountPage");
-                        //loadFragment(new AccountFragment());
-                        //return true;
                         Intent a = new Intent(Paybills.this, AccountPage.class);
                         startActivity(a);
                         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.budget:
-                        //toolbar.setTitle("Budget");
-                        //loadFragment(new BudgetFragment());
-                        //return true;
                         Intent b = new Intent(Paybills.this, BudgetPage.class);
                         startActivity(b);
                         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.history:
-                        //toolbar.setTitle("History");
-                        //loadFragment(new HistoryFragment());
-                        //return true;
                         Intent c = new Intent(Paybills.this, History.class);
                         startActivity(c);
                         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                         break;
                     case R.id.paybills:
-                        //toolbar.setTitle("PayBills");
-                        //loadFragment(new PaybillsFragment());
-                        //return true;
                         break;
                 }
                 return false;
             }
         });
-
-         //toolbar.setTitle("Paybills");
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.top, menu);
         return true;
-
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -325,21 +285,4 @@ public class Paybills extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    // public void saveArrayList(List<String> list, String key){
-    //     SharedPreferences prefs = getSharedPreferences("UserInfo",0);
-    //     SharedPreferences.Editor editor = prefs.edit();
-    //     Gson gson = new Gson();
-    //     String json = gson.toJson(list);
-    //     editor.putString(key, json);
-    //     editor.apply();
-
-    // }
-
-    // public List<String> getArrayList(String key){
-    //     SharedPreferences prefs = getSharedPreferences("UserInfo",0);
-    //     Gson gson = new Gson();
-    //     String json = prefs.getString(key, null);
-    //     Type type = new TypeToken<List<String>>(){}.getType();
-    //     return gson.fromJson(json, type);
-    // }
 }

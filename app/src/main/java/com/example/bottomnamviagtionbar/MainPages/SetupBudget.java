@@ -48,6 +48,7 @@ public class SetupBudget extends AppCompatActivity {
                     String email = sharedPrefsUtil.get("email_income", "");
                     User user = sharedPrefsUtil.get(email, User.class, new User());
                     user.setIncome(income);
+                    user.setIncome_reset(income);
                     sharedPrefsUtil.put(email, User.class, user);
                     Intent intent = new Intent(SetupBudget.this, MainActivity.class);
                     startActivity(intent);

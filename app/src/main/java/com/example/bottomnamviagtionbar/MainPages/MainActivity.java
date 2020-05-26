@@ -21,6 +21,7 @@ import com.anychart.AnyChartView;
 import com.anychart.charts.Pie;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.example.bottomnamviagtionbar.Helpers.BackgroundService;
 import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
 import com.example.bottomnamviagtionbar.Helpers.PieChartData;
 import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
@@ -34,6 +35,9 @@ import com.example.bottomnamviagtionbar.Settings.settings;
 
 import java.util.Calendar;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,6 +49,21 @@ public class MainActivity extends AppCompatActivity {
     User user;
     AnyChartView pieChart;
     Pie pie;
+
+    Timer timer = new Timer();
+    final Handler handler = new Handler();
+
+    TimerTask timertask = new TimerTask() {
+        @Override
+        public void run() {
+            handler.post(new Runnable() {
+                public void run() {
+                    startService(new Intent(getApplicationContext(),
+                            BackgroundService.class));
+                }
+            });
+        }
+    };
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -151,5 +170,19 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        timer.schedule(timertask, 0,  5 * 1000);
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        timer.cancel();
     }
 }

@@ -1,36 +1,26 @@
 package com.example.bottomnamviagtionbar.Interfaces;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
    private String name;
    private String password;
    private String email;
    private float income;
+   private float income_reset;
    private ArrayList<Bill> bills;
    private List<String> histories;
 
    public User(){
-      name = null;
-      password =null;
-      email =null;
-      income = 0.0f;
-      bills = null;
-      histories = null;
+
    }
 
    public User(String _name, String _password, String _email){
       name = _name;
       password = _password;
       email = _email;
+      income_reset = 0;
       income = 0;
       bills = null;
       histories = null;
@@ -58,6 +48,14 @@ public class User {
 
    public List<String> getHistories() {
       return histories;
+   }
+
+   public float getIncome_reset() {
+      return income_reset;
+   }
+
+   public void setIncome_reset(float income_reset) {
+      this.income_reset = income_reset;
    }
 
    public void setBills(ArrayList<Bill> bills) {
