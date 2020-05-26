@@ -19,9 +19,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.example.bottomnamviagtionbar.Helpers.HelperFunctions;
 import com.example.bottomnamviagtionbar.Helpers.PageAdapter;
 import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
 import com.example.bottomnamviagtionbar.Interfaces.BarGraph;
+import com.example.bottomnamviagtionbar.Interfaces.Bill;
 import com.example.bottomnamviagtionbar.Interfaces.PointGraph;
 import com.example.bottomnamviagtionbar.Interfaces.User;
 import com.example.bottomnamviagtionbar.MainPages.Budget.BudgetPage;
@@ -30,6 +33,8 @@ import com.example.bottomnamviagtionbar.RergistrationAndLogin.Login;
 import com.example.bottomnamviagtionbar.Settings.ModifyIncome;
 import com.example.bottomnamviagtionbar.Settings.NotificationPage;
 import com.example.bottomnamviagtionbar.Settings.settings;
+
+import java.util.ArrayList;
 
 public class AccountPage extends AppCompatActivity {
 
@@ -47,6 +52,9 @@ public class AccountPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
+        BillValue = findViewById(R.id.amount_Bills);
+        IncomeValue = findViewById(R.id.amount_Income);
+        SavingsValue = findViewById(R.id.amount_Savings);
         mPager = findViewById(R.id.viewPager);
         adapter = new PageAdapter(getSupportFragmentManager());
         adapter.addFragment(new BarGraph(), "Bar");
@@ -69,19 +77,27 @@ public class AccountPage extends AppCompatActivity {
             }
         });
 
-
         sharedPrefsUtil = new SharedPrefsUtil(this);
         String email = sharedPrefsUtil.get("user_email", "");
         User user = sharedPrefsUtil.get(email, User.class, new User());
+        ArrayList<Bill> bills = user.getBills();
+        float billTotal = 0;
+        if(bills != null)
+        {
+            HelperFunctions helperFunc = new HelperFunctions();
+            float[] billCategoryMap = helperFunc.mapBillCategories(bills);
+
+            for(int i = 0; i < billCategoryMap.length; ++i ){
+                billTotal += billCategoryMap[i];
+            }
+        }
         String incomeVal= String.valueOf(user.getIncome());
-        String billVal = String.valueOf(user.getBillsAmount());
-        String savingsVal = String.valueOf(user.getIncome() - user.getBillsAmount());
-        BillValue = findViewById(R.id.amount_Bills);
+        String billVal = String.valueOf(billTotal);
+        String savingsVal = String.valueOf(user.getIncome() - billTotal);
         BillValue.setText("$" + billVal);
-        SavingsValue = findViewById(R.id.amount_Savings);
         SavingsValue.setText("$" + savingsVal);
-        IncomeValue = findViewById(R.id.amount_Income);
         IncomeValue.setText("$" + incomeVal);
+
         IncomeValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

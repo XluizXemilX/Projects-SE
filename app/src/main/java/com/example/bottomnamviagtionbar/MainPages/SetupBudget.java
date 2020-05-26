@@ -51,6 +51,7 @@ public class SetupBudget extends AppCompatActivity {
                     String email = sharedPrefsUtil.get("email_income", "");
                     User user = sharedPrefsUtil.get(email, User.class, new User());
                     user.setIncome(income);
+                    user.setIncome_reset(income);
                     user.setOriginalIncome(income);
                     Date date = new Date();
                     SimpleDateFormat formatter = new SimpleDateFormat("MM");

@@ -34,7 +34,7 @@ public class RecoveryMessage extends AppCompatActivity {
            public void onClick(View v){
                String EmailVal = sharedPrefsUtil.get("user_email", "");
                String tempPass = sharedPrefsUtil.get("tempPassword", "");
-               GMailSender sender = new GMailSender("luisemil12344@gmail.com", "pegasus123");
+               GMailSender sender = new GMailSender("savemoneyapp79@gmail.com", "pegasus2001");
                try {
                    sender.sendMail("Recovery Password", "This is your temporary password " + tempPass +
                            ". Please remember to change it after login into the app.", "luisemil12344@gmail.com", EmailVal);
