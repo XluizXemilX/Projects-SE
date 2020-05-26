@@ -56,20 +56,20 @@ public class MainActivity extends AppCompatActivity {
     String Month;
     float budget;
 
-    Timer timer = new Timer();
-    final Handler handler = new Handler();
+    //Timer timer = new Timer();
+    //final Handler handler = new Handler();
 
-    TimerTask timertask = new TimerTask() {
-        @Override
-        public void run() {
-            handler.post(new Runnable() {
-                public void run() {
-                    startService(new Intent(getApplicationContext(),
-                            BackgroundService.class));
-                }
-            });
-        }
-    };
+    //TimerTask timertask = new TimerTask() {
+     //   @Override
+     //   public void run() {
+    //       handler.post(new Runnable() {
+     //           public void run() {
+     //               startService(new Intent(getApplicationContext(),
+     //                       BackgroundService.class));
+     //           }
+     //       });
+     //   }
+   // };
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -93,14 +93,54 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("MM");
         String DateATime = formatter.format(date);
 
-
         String CurrentMonth = user.getCurrentMonth();
+
+        if (CurrentMonth == null)
+            user.setCurrentMonth(DateATime);
+
+        if (CurrentMonth.equals("01")){
+            user.setMonthBills(user.getBillsAmount(), 0);
+        }
+        else if (CurrentMonth.equals("02")){
+            user.setMonthBills(user.getBillsAmount(), 1);
+        }
+        else if (CurrentMonth.equals("03")){
+            user.setMonthBills(user.getBillsAmount(), 2);
+        }
+        else if (CurrentMonth.equals("04")){
+            user.setMonthBills(user.getBillsAmount(), 3);
+        }
+        else if (CurrentMonth.equals("05")){
+            user.setMonthBills(user.getBillsAmount(), 4);
+        }
+        else if (CurrentMonth.equals("06")){
+            user.setMonthBills(user.getBillsAmount(), 5);
+        }
+        else if (CurrentMonth.equals("07")){
+            user.setMonthBills(user.getBillsAmount(), 6);
+        }
+        else if (CurrentMonth.equals("08")){
+            user.setMonthBills(user.getBillsAmount(), 7);
+        }
+        else if (CurrentMonth.equals("09")){
+            user.setMonthBills(user.getBillsAmount(), 8);
+        }
+        else if (CurrentMonth.equals("10")){
+            user.setMonthBills(user.getBillsAmount(), 9);
+        }
+        else if (CurrentMonth.equals("11")){
+            user.setMonthBills(user.getBillsAmount(), 10);
+        }
+        else {
+            user.setMonthBills(user.getBillsAmount(), 11);
+        }
+
         if (!CurrentMonth.equals(DateATime)){
             user.setIncome(user.getOriginalIncome());
-            user.setCurrentMonth(DateATime);
             user.setBillsAmount(0);
-            sharedPrefsUtil.put(email, User.class, user);
+            user.setCurrentMonth(DateATime);
         }
+        sharedPrefsUtil.put(email, User.class, user);
         ////
 
         ArrayList<Bill> bills = user.getBills();
@@ -197,13 +237,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        timer.schedule(timertask, 0,  5 * 1000);
+        //timer.schedule(timertask, 0,  5 * 1000);
     }
 
 
     @Override
     protected void onStop() {
         super.onStop();
-        timer.cancel();
+        //timer.cancel();
     }
 }

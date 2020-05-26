@@ -14,12 +14,14 @@ public class User {
    private float originalIncome;
    private String currentMonth;
    private float billsAmount;
+   private float[] monthBills;
 
    public User(){
 
       originalIncome = 0.0f;
       currentMonth = null;
       billsAmount = 0.0f;
+      monthBills = new float[12];
    }
 
    public User(String _name, String _password, String _email){
@@ -33,6 +35,7 @@ public class User {
       originalIncome = 0;
       currentMonth = null;
       billsAmount = 0;
+      monthBills = new float[12];
    }
 
    public String getEmail() {
@@ -77,6 +80,10 @@ public class User {
 
    public float getBillsAmount() {
       return billsAmount;
+   }
+
+   public float getMonthBills(int index) {
+      return monthBills[index];
    }
 
    public void setBills(ArrayList<Bill> bills) {
@@ -137,6 +144,10 @@ public class User {
 
    public void addBllsAmount(float billsAmount) {
       this.billsAmount += billsAmount;
+   }
+
+   public void setMonthBills(float monthBills, int index) {
+      this.monthBills[index] = monthBills;
    }
 
 }

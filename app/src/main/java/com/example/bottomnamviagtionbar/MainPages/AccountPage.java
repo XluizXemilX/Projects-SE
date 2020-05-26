@@ -40,6 +40,7 @@ public class AccountPage extends AppCompatActivity {
 
     TextView IncomeValue, BillValue, SavingsValue;
     SharedPrefsUtil sharedPrefsUtil;
+    User user;
 
     ViewPager mPager;
     PageAdapter adapter;
@@ -79,7 +80,44 @@ public class AccountPage extends AppCompatActivity {
 
         sharedPrefsUtil = new SharedPrefsUtil(this);
         String email = sharedPrefsUtil.get("user_email", "");
-        User user = sharedPrefsUtil.get(email, User.class, new User());
+        user = sharedPrefsUtil.get(email, User.class, new User());
+        String CurrentMonth = user.getCurrentMonth();
+        if (CurrentMonth.equals("01")){
+            user.setMonthBills(user.getBillsAmount(), 0);
+        }
+        else if (CurrentMonth.equals("02")){
+            user.setMonthBills(user.getBillsAmount(), 1);
+        }
+        else if (CurrentMonth.equals("03")){
+            user.setMonthBills(user.getBillsAmount(), 2);
+        }
+        else if (CurrentMonth.equals("04")){
+            user.setMonthBills(user.getBillsAmount(), 3);
+        }
+        else if (CurrentMonth.equals("05")){
+            user.setMonthBills(user.getBillsAmount(), 4);
+        }
+        else if (CurrentMonth.equals("06")){
+            user.setMonthBills(user.getBillsAmount(), 5);
+        }
+        else if (CurrentMonth.equals("07")){
+            user.setMonthBills(user.getBillsAmount(), 6);
+        }
+        else if (CurrentMonth.equals("08")){
+            user.setMonthBills(user.getBillsAmount(), 7);
+        }
+        else if (CurrentMonth.equals("09")){
+            user.setMonthBills(user.getBillsAmount(), 8);
+        }
+        else if (CurrentMonth.equals("10")){
+            user.setMonthBills(user.getBillsAmount(), 9);
+        }
+        else if (CurrentMonth.equals("11")){
+            user.setMonthBills(user.getBillsAmount(), 10);
+        }
+        else {
+            user.setMonthBills(user.getBillsAmount(), 11);
+        }
         ArrayList<Bill> bills = user.getBills();
         float billTotal = 0;
         if(bills != null)

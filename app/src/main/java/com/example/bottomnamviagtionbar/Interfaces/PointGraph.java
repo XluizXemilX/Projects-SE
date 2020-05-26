@@ -14,6 +14,7 @@ import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
 import com.anychart.charts.Map;
 import com.anychart.core.Chart;
+import com.example.bottomnamviagtionbar.Helpers.SharedPrefsUtil;
 import com.example.bottomnamviagtionbar.R;
 
 import java.util.ArrayList;
@@ -33,6 +34,9 @@ public class PointGraph extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    User user;
+    SharedPrefsUtil sharedPrefsUtil;
 
     public PointGraph() {
         // Required empty public constructor
@@ -81,20 +85,24 @@ public class PointGraph extends Fragment {
 
     public void setBarChart(final Cartesian point) {
 
+        sharedPrefsUtil = new SharedPrefsUtil(getContext());
+        String email = sharedPrefsUtil.get("email_income", "");
+        user = sharedPrefsUtil.get(email, User.class, new User());
+
         final List<DataEntry> dataEntries= new ArrayList<>();
 
-        dataEntries.add(new ValueDataEntry("Jan", 24));
-        dataEntries.add(new ValueDataEntry("Feb", 10));
-        dataEntries.add(new ValueDataEntry("Mar", 20));
-        dataEntries.add(new ValueDataEntry("Apr", 10));
-        dataEntries.add(new ValueDataEntry("May", 5));
-        dataEntries.add(new ValueDataEntry("Jun", 5));
-        dataEntries.add(new ValueDataEntry("Jul", 5));
-        dataEntries.add(new ValueDataEntry("Aug", 5));
-        dataEntries.add(new ValueDataEntry("Sep", 100));
-        dataEntries.add(new ValueDataEntry("Oct", 5));
-        dataEntries.add(new ValueDataEntry("Nov", 5));
-        dataEntries.add(new ValueDataEntry("Dec", 5));
+        dataEntries.add(new ValueDataEntry("Jan", user.getMonthBills(0)));
+        dataEntries.add(new ValueDataEntry("Feb", user.getMonthBills(1)));
+        dataEntries.add(new ValueDataEntry("Mar", user.getMonthBills(2)));
+        dataEntries.add(new ValueDataEntry("Apr", user.getMonthBills(3)));
+        dataEntries.add(new ValueDataEntry("May", user.getMonthBills(4)));
+        dataEntries.add(new ValueDataEntry("Jun", user.getMonthBills(5)));
+        dataEntries.add(new ValueDataEntry("Jul", user.getMonthBills(6)));
+        dataEntries.add(new ValueDataEntry("Aug", user.getMonthBills(7)));
+        dataEntries.add(new ValueDataEntry("Sep", user.getMonthBills(8)));
+        dataEntries.add(new ValueDataEntry("Oct", user.getMonthBills(9)));
+        dataEntries.add(new ValueDataEntry("Nov", user.getMonthBills(10)));
+        dataEntries.add(new ValueDataEntry("Dec", user.getMonthBills(11)));
 
 
         point.data(dataEntries);
