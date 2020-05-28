@@ -132,9 +132,9 @@ public class AccountPage extends AppCompatActivity {
         String incomeVal= String.valueOf(user.getIncome());
         String billVal = String.valueOf(billTotal);
         String savingsVal = String.valueOf(user.getIncome() - billTotal);
-        BillValue.setText("$" + billVal);
-        SavingsValue.setText("$" + savingsVal);
-        IncomeValue.setText("$" + incomeVal);
+        BillValue.setText("$" + String.format("%.2f",Float.valueOf(billVal)));
+        SavingsValue.setText("$" + String.format("%.2f",Float.valueOf(savingsVal)));
+        IncomeValue.setText("$" + String.format("%.2f",Float.valueOf(incomeVal)));
 
         IncomeValue.setOnClickListener(new View.OnClickListener() {
             @Override

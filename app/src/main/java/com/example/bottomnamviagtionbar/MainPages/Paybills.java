@@ -147,10 +147,11 @@ public class Paybills extends AppCompatActivity {
                 String historyString = String.format(
                     "%s bill of $%s was added on %s. Current savings is %s",
                     categorySpinnerText,
-                    billText,
+                        String.format("%.2f",Float.valueOf(etAddbills.getText().toString())),
                     dateText,
-                    Float.toString(savings)
+                        String.format("%.2f",savings)
                 );
+                //String.format("%.2f",value)
 
                 //Put History into shared pref.
                 user.addHistory(0, historyString);
@@ -180,7 +181,10 @@ public class Paybills extends AppCompatActivity {
                 String DateATime = formatter.format(date);
 
                 //History String
-                String historyString = String.format("$%s added on %s.\nNew Balance %s", balance, DateATime,Float.toString(user.getIncome()));
+                String historyString = String.format("$%s added on %s.\nNew Balance %s",
+                        String.format("%.2f",balance),
+                        DateATime,
+                        String.format("%.2f",user.getIncome()));
 
                 //Put History into shared pref.
                 user.addHistory(0, historyString);
@@ -215,9 +219,9 @@ public class Paybills extends AppCompatActivity {
 
                 //History String
                 String historyString = String.format(
-                    "Type: %s\tAmount: %s\tRecurring Type: %s",
+                    "Type: %s\t Amount: %s\t Recurring Type: %s",
                     categorySpinnerText,
-                    recurringText,
+                        String.format("%.2f",Float.valueOf(etAddrecurring.getText().toString())),
                     frequencySpinnerText
                 );
 
