@@ -49,7 +49,6 @@ public class Paybills extends AppCompatActivity {
     HelperFunctions helperFunc;
     User user;
     String email;
-    private Pattern pattern;
     private Matcher matcher;
 
     private String DATE_PATTERN =
@@ -141,7 +140,6 @@ public class Paybills extends AppCompatActivity {
                     dateText,
                         String.format("%.2f",savings)
                 );
-                //String.format("%.2f",value)
 
                 //Put History into shared pref.
                 user.addHistory(0, historyString);
@@ -232,7 +230,7 @@ public class Paybills extends AppCompatActivity {
 
                     //History String
                     String historyString = String.format(
-                            "Type: %s\tAmount: %s\tRecurring Type: %s\tDue: %s",
+                            "Type: %s \t Amount: %s \t Due: %s",
                             categorySpinnerText,
                             recurringText,
                             inputDate

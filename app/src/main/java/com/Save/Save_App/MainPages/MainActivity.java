@@ -53,8 +53,18 @@ public class MainActivity extends AppCompatActivity {
     String Month;
     float budget;
 
-    //Timer timer = new Timer();
-    //final Handler handler = new Handler();
+    Timer timer = new Timer();
+    final Handler handler = new Handler();
+    TimerTask timertask = new TimerTask() {
+        @Override
+        public void run() {
+            handler.post(new Runnable() {
+                public void run() {
+                    startForegroundService(new Intent(getApplicationContext(), BackgroundService.class));
+                }
+            });
+        }
+    };
 
     
 

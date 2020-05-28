@@ -34,17 +34,17 @@
             android:name="com.Save.Save_App.MainPages.Paybills"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.Save.Save_App.MainPages.Budget.BudgetPage"
+            android:name=".MainPages.Budget.BudgetPage"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.Save.Save_App.RergistrationAndLogin.ChangePassword" />
-        <activity android:name="com.Save.Save_App.MainPages.SetupBudget" />
-        <activity android:name="com.Save.Save_App.RergistrationAndLogin.RecoveryMessage" />
-        <activity android:name="com.Save.Save_App.RergistrationAndLogin.RecoveryPass" />
-        <activity android:name="com.Save.Save_App.RergistrationAndLogin.Register" />
+        <activity android:name=".RergistrationAndLogin.ChangePassword" />
+        <activity android:name=".MainPages.SetupBudget" />
+        <activity android:name=".RergistrationAndLogin.RecoveryMessage" />
+        <activity android:name=".RergistrationAndLogin.RecoveryPass" />
+        <activity android:name=".RergistrationAndLogin.Register" />
         <activity
-            android:name="com.Save.Save_App.MainPages.MainActivity"
+            android:name=".MainPages.MainActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name="com.Save.Save_App.SplashScreen">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name="com.Save.Save_App.Helpers.BackgroundService"
+            android:name=".Helpers.BackgroundService"
             android:permission="android.permission.BIND_JOB_SERVICE"
 
             android:enabled="true" >

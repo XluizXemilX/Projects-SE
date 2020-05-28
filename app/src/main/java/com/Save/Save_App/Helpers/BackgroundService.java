@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+
 import com.Save.Save_App.Interfaces.User;
 import com.Save.Save_App.R;
 
@@ -17,6 +18,7 @@ public class BackgroundService extends android.app.Service {
         //super("BackgroundService");
         // TODO Auto-generated constructor stub
     }
+
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
@@ -42,9 +44,9 @@ public class BackgroundService extends android.app.Service {
         return START_STICKY;
     }
 
-        @Nullable
-        @Override
-        public IBinder onBind(Intent intent) {
-            return null;
-        }
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 }

@@ -14,7 +14,6 @@ import android.support.v4.content.ContextCompat;
 import com.Save.Save_App.MainPages.MainActivity;
 import com.Save.Save_App.R;
 
-
 public class Notification {
     private PendingIntent notificationPendingIntent;
 
