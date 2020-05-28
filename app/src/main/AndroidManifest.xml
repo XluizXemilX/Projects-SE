@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bottomnamviagtionbar">
+    package="com.Save.App">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
 
     <application
         android:allowBackup="true"
@@ -15,34 +17,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Settings.ModifyIncome" />
-        <activity android:name=".RergistrationAndLogin.Login" />
-        <activity android:name=".Settings.NotificationPage" />
-        <activity android:name=".Settings.ProfileFolder.ChangePasswordProfile" />
-        <activity android:name=".Settings.TermsOfService" />
-        <activity android:name=".Settings.ProfileFolder.ProfileInfo" />
-        <activity android:name=".Settings.settings" />
-        <activity android:name=".Settings.privacy" />
-        <activity android:name=".Settings.preferances" />
+        <activity android:name="com.Save.App.Settings.ModifyIncome" />
+        <activity android:name="com.Save.App.RergistrationAndLogin.Login" />
+        <activity android:name="com.Save.App.Settings.NotificationPage" />
+        <activity android:name="com.Save.App.Settings.ProfileFolder.ChangePasswordProfile" />
+        <activity android:name="com.Save.App.Settings.TermsOfService" />
+        <activity android:name="com.Save.App.Settings.ProfileFolder.ProfileInfo" />
+        <activity android:name="com.Save.App.Settings.settings" />
+        <activity android:name="com.Save.App.Settings.privacy" />
+        <activity android:name="com.Save.App.Settings.preferances" />
         <activity
-            android:name=".MainPages.AccountPage"
+            android:name="com.Save.App.MainPages.AccountPage"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".MainPages.History" />
+        <activity android:name="com.Save.App.MainPages.History" />
         <activity
-            android:name=".MainPages.Paybills"
+            android:name="com.Save.App.MainPages.Paybills"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".MainPages.Budget.BudgetPage"
+            android:name="com.Save.App.MainPages.Budget.BudgetPage"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".RergistrationAndLogin.ChangePassword" />
-        <activity android:name=".MainPages.SetupBudget" />
-        <activity android:name=".RergistrationAndLogin.RecoveryMessage" />
-        <activity android:name=".RergistrationAndLogin.RecoveryPass" />
-        <activity android:name=".RergistrationAndLogin.Register" />
+        <activity android:name="com.Save.App.RergistrationAndLogin.ChangePassword" />
+        <activity android:name="com.Save.App.MainPages.SetupBudget" />
+        <activity android:name="com.Save.App.RergistrationAndLogin.RecoveryMessage" />
+        <activity android:name="com.Save.App.RergistrationAndLogin.RecoveryPass" />
+        <activity android:name="com.Save.App.RergistrationAndLogin.Register" />
         <activity
-            android:name=".MainPages.MainActivity"
+            android:name="com.Save.App.MainPages.MainActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.Save.App.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,7 +52,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".Helpers.BackgroundService"
+            android:name="com.Save.App.Helpers.BackgroundService"
             android:permission="android.permission.BIND_JOB_SERVICE"
 
             android:enabled="true" >
