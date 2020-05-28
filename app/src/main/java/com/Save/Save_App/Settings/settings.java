@@ -17,8 +17,6 @@ public class settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         TextView Profile = (TextView)findViewById(R.id.Profile);
-        TextView Privacy = (TextView)findViewById(R.id.Privacy);
-        TextView Preferances =(TextView)findViewById(R.id.Preferance);
         TextView TermsOfServices = (TextView)findViewById(R.id.Terms_of_Services);
         TextView Exit = (TextView)findViewById(R.id.ExitSettings);
 
@@ -33,24 +31,6 @@ public class settings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(settings.this, ProfileInfo.class);
-                startActivity(i);
-
-            }
-        });
-
-        Privacy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(settings.this, privacy.class);
-                startActivity(i);
-
-            }
-        });
-
-        Preferances.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(settings.this, preferances.class);
                 startActivity(i);
 
             }

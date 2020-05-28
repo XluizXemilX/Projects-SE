@@ -40,6 +40,7 @@ import java.util.TimerTask;
 import java.util.Date;
 
 import android.os.Handler;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     Pie pie;
     String Month;
     float budget;
+    TextView message;
 
     Timer timer = new Timer();
     final Handler handler = new Handler();
@@ -145,13 +147,14 @@ public class MainActivity extends AppCompatActivity {
         if(bills != null)
         {
             float[] billCategoryMap = helperFunc.mapBillCategories(bills);
+
             String []categoryString = {"Rent", "Services", "Food", "Entertainment", "Clothes", "Other"};
             float billTotal = 0;
             for(int i = 0; i < billCategoryMap.length; ++i ){
                 billTotal += billCategoryMap[i];
                 dataEntries.add(new ValueDataEntry(categoryString[i], billCategoryMap[i]));
             }
-            dataEntries.add(new ValueDataEntry("Savings", user.getIncome() - billTotal));
+            dataEntries.add(new ValueDataEntry("Savings", user.getIncome() - user.getBillsAmount()));
         }
 
         pie.data(dataEntries);
@@ -163,6 +166,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }, 100);
+
+        message = findViewById(R.id.message);
+        if(user.getBillsAmount() > user.getIncome()){
+            message.setText("You have pass your limit!!");
+            message.setBackgroundResource(R.drawable.red_box);
+        }
+        else{
+            message.setText("You still within your limit!!");
+            message.setBackgroundResource(R.drawable.green_box);
+        }
 
         Toolbar topbar = findViewById(R.id.topbar);
         topbar.setTitle("Home");

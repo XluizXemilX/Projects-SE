@@ -55,44 +55,6 @@
         android:background="?attr/listChoiceBackgroundIndicator" />
 
     <TextView
-        android:id="@+id/Privacy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Privacy"
-        android:textSize="24sp" />
-
-    <View
-        android:id="@+id/divider10"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
-    <View
-        android:id="@+id/divider12"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="?attr/listChoiceBackgroundIndicator" />
-
-    <TextView
-        android:id="@+id/Preferance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Preferances"
-        android:textSize="24sp" />
-
-    <View
-        android:id="@+id/divider13"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
-    <View
-        android:id="@+id/divider14"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="?attr/listChoiceBackgroundIndicator" />
-
-    <TextView
         android:id="@+id/Terms_of_Services"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

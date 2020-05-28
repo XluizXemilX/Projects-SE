@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:background="#EDEDED"
     tools:context=".MainPages.Paybills">
 
     <include
@@ -48,6 +49,7 @@
                     android:id="@+id/LinearLayoutDefaultFields"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/box"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -78,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/bg_btn_cal"
                 android:text="Add Bill" />
 
             <TextView
@@ -100,9 +103,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/box"
                 android:ems="10"
                 android:hint="@string/value"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/AddBalanceButton"
@@ -110,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/bg_btn_cal"
                 android:text="ADD BALANCE" />
 
             <TextView
@@ -142,7 +148,8 @@
                     <Spinner
                         android:id="@+id/spinner4"
                         android:layout_width="176dp"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:background="@drawable/box" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -152,6 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/box"
                 android:ems="10"
                 android:hint="@string/value"
                 android:inputType="numberDecimal" />
@@ -173,6 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/box"
                         android:ems="10"
                         android:hint="@string/Date"
                         android:inputType="number" />
@@ -185,6 +194,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/bg_btn_cal"
                 android:text="ADD RECURING BILL" />
 
             <TextView

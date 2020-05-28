@@ -27,7 +27,6 @@ public class BackgroundService extends android.app.Service {
         String email = sharedPrefsUtil.get("email_income","");
         User user = sharedPrefsUtil.get(email, User.class, new User());
 
-
         if(user.getRecurrent_bills() != null) {
             for (int i = 0; i < user.getRecurrent_bills().size(); i++) {
                 Calendar date = Calendar.getInstance();

@@ -224,7 +224,7 @@ public class Paybills extends AppCompatActivity {
                     bill.amount = Float.valueOf(recurringText);
                     bill.category = categories;
                     bill.date = inputDate;
-
+                    user.addBill(bill);
                     user.addRecurringBills(bill);
 
 
@@ -233,7 +233,7 @@ public class Paybills extends AppCompatActivity {
                             "Type: %s \t Amount: %s \t Due: %s",
                             categorySpinnerText,
                             recurringText,
-                            inputDate
+                            inputDate + "th"
                     );
 
                     //Put History into shared pref.

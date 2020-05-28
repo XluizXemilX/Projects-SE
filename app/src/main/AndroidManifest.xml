@@ -24,8 +24,6 @@
         <activity android:name="com.Save.Save_App.Settings.TermsOfService" />
         <activity android:name="com.Save.Save_App.Settings.ProfileFolder.ProfileInfo" />
         <activity android:name="com.Save.Save_App.Settings.settings" />
-        <activity android:name="com.Save.Save_App.Settings.privacy" />
-        <activity android:name="com.Save.Save_App.Settings.preferances" />
         <activity
             android:name="com.Save.Save_App.MainPages.AccountPage"
             android:windowSoftInputMode="adjustPan" />
