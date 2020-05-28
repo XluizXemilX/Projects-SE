@@ -77,7 +77,8 @@ public class History extends AppCompatActivity {
             List.setLayoutParams(layoutParams);
             List.setText(history);
             List.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            List.setBackgroundColor(0xffffdbdb);
+            List.setTextColor(-16777216);
+            List.setBackgroundColor(-3355444);
             linearLayout.addView(List);
         }
 
