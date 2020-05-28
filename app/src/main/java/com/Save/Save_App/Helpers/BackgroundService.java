@@ -12,7 +12,7 @@ import java.util.Calendar;
 
 public class BackgroundService extends android.app.Service {
 
-    protected static final int NOTIFICATION_ID = 1337;
+    protected static final int NOTIFICATION_ID = 1336;
 
     public BackgroundService() {
         //super("BackgroundService");
@@ -34,11 +34,11 @@ public class BackgroundService extends android.app.Service {
                 if (user.getRecurrent_bills().get(i).date.equals(killMe)) {
                     Notification notification = new Notification();
                     startForeground(NOTIFICATION_ID, notification.setNotification(getApplication(), "Save", "You have a bill due today!!", R.drawable.logo));
-
+                    System.out.println("Service Started");
                 }
             }
         }
-        System.out.println("Service Started");
+
         // POST request code here
         return START_STICKY;
     }

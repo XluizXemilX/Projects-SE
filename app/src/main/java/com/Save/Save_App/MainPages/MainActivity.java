@@ -4,6 +4,7 @@ package com.Save.Save_App.MainPages;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
@@ -13,13 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CalendarView;
+import android.widget.TextView;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.charts.Pie;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.Save.Save_App.Helpers.BackgroundService;
 import com.Save.Save_App.Helpers.HelperFunctions;
 import com.Save.Save_App.Helpers.SharedPrefsUtil;
@@ -30,29 +26,25 @@ import com.Save.Save_App.R;
 import com.Save.Save_App.RergistrationAndLogin.Login;
 import com.Save.Save_App.Settings.NotificationPage;
 import com.Save.Save_App.Settings.settings;
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Pie;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import java.util.Date;
-
-import android.os.Handler;
-import android.widget.TextView;
-
 public class MainActivity extends AppCompatActivity {
 
-    CalendarView calendar;
-    Calendar cal;
     SharedPrefsUtil sharedPrefsUtil;
     HelperFunctions helperFunc;
     User user;
     AnyChartView pieChart;
     Pie pie;
-    String Month;
-    float budget;
     TextView message;
 
     Timer timer = new Timer();
@@ -220,7 +212,9 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        timer.schedule(timertask, 0,  86400000);
+
+        timer.schedule(timertask, 0, 86400000);
+
     }
 
     @Override

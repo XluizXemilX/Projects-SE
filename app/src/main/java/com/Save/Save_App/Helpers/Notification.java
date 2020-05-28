@@ -40,7 +40,7 @@ public class Notification {
             //mContext.getString(R.string.channel_name);
             int importance = NotificationManager.IMPORTANCE_HIGH;
 
-            String CHANNEL_ID = "com.example.bottomnamviagtionbar.channel";
+            String CHANNEL_ID = "com.Save.Save_App.channel";
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             //String description = mContext.getString(R.string.notifications_description);
             String description = "I would like to receive travel alerts and notifications for:";
@@ -92,7 +92,7 @@ public class Notification {
         String description = "Notifications for download status";
         int importance = NotificationManager.IMPORTANCE_HIGH;
 
-        NotificationChannel mChannel = new NotificationChannel("com.example.bottomnamviagtionbar.channel", name, importance);
+        NotificationChannel mChannel = new NotificationChannel("com.Save.Save_App.channel", name, importance);
         mChannel.setDescription(description);
         mChannel.enableLights(true);
         mChannel.setLightColor(Color.BLUE);
